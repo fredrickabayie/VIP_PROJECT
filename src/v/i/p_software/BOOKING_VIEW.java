@@ -13,12 +13,16 @@ import java.awt.Component;
  * @author chokayg3
  */
 public class BOOKING_VIEW extends javax.swing.JFrame {
+    CreateBookingControl bookingControl;
 
     /**
      * Creates new form BOOKING_VIEW
      */
     public BOOKING_VIEW() {
-        initComponents();
+        initComponents();       
+        bookingControl=new CreateBookingControl();
+        
+        
     }
 
     /**
@@ -56,17 +60,11 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
 
         jLabel1.setText("ID");
 
-        jTextField1.setText("jTextField1");
-
         jLabel2.setText("Firstname");
 
         jLabel3.setText("Surname");
 
-        jTextField2.setText("jTextField2");
-
         jLabel4.setText("Phone");
-
-        jTextField3.setText("jTextField3");
 
         jLabel5.setText("Gender");
 
@@ -82,15 +80,18 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
 
         jLabel8.setText("E-mail");
 
-        jTextField4.setText("jTextField4");
-
         jLabel9.setText("Price");
 
-        jLabel10.setText("jLabel10");
+        jLabel10.setText("1000");
 
-        jLabel11.setText("jLabel11");
+        jLabel11.setText("0");
 
         jButton1.setText("Submit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("jButton2");
 
@@ -113,19 +114,14 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                         .addGap(23, 23, 23)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel11)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 112, Short.MAX_VALUE)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jComboBox1, 0, 183, Short.MAX_VALUE)
+                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(63, 63, 63)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -137,23 +133,28 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                                 .addGap(137, 137, 137)
                                 .addComponent(jButton2)
                                 .addGap(37, 37, 37)))
-                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 46, Short.MAX_VALUE)
+                                .addGap(42, 42, 42)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                            .addComponent(jTextField4)
+                                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 46, Short.MAX_VALUE)
                                         .addComponent(jButton3)
-                                        .addGap(154, 154, 154))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(148, 148, 148))))))))
+                                        .addGap(154, 154, 154))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(127, 127, 127))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +186,7 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
@@ -200,6 +201,22 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        bookingControl.setValues(0,jLabel11.getText());//store the ticket Id
+        bookingControl.setValues(1,jTextField1.getText());//store the first name
+        bookingControl.setValues(2,jTextField2.getText() );//store surname
+        bookingControl.setValues(3,jTextField3.getText());//stores the phone number
+        bookingControl.setValues(4, jTextField4.getText());//stores the email address
+        bookingControl.setValues(5,jComboBox1.getSelectedItem().toString() );//stores the Passanger's Gender
+        bookingControl.setValues(6,jComboBox2.getSelectedItem().toString() );//stores the route of the journey
+        bookingControl.setValues(7,jComboBox3.getSelectedItem().toString() );//stores the departure time
+        bookingControl.setValues(8,jLabel10.getText());//stores the ticket price
+        
+        bookingControl.book(); //The method inserts the stored details in the bookings database
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

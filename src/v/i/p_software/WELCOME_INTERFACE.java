@@ -7,6 +7,7 @@
 package v.i.p_software;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -55,6 +56,11 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
         });
 
         login_button.setText("Login");
+        login_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +80,7 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel2)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,6 +104,13 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
         // TODO add your handling code here:
         new BOOKING_VIEW().setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_createbooking_buttonActionPerformed
+
+    private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
+        // TODO add your handling code here:
+       
+        int ticketNo=Integer.parseInt(JOptionPane.showInputDialog(null, "Please put your Ticket Number."));
+        
+    }//GEN-LAST:event_login_buttonActionPerformed
 
     /**
      * @param args the command line arguments
