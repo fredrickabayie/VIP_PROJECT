@@ -41,7 +41,7 @@ public class ViewEditTicket {
     public void getTicket(){
         try {
 		java.sql.Statement s = conn.createStatement();
-		java.sql.ResultSet r = s.executeQuery("SELECT * FROM products where code="+view+";");
+		java.sql.ResultSet r = s.executeQuery("SELECT * FROM booking where TicketNo="+view+";");
 		while(r.next()) {
 			
                                info[0]=r.getString("TicketNo");
@@ -56,6 +56,7 @@ public class ViewEditTicket {
                                      
                                                    
 		}
+         s.close();       
 	}
 	catch (Exception e) {
 		System.out.println(e);
@@ -70,20 +71,24 @@ public class ViewEditTicket {
     }
     
     public void update(){
+        
                 	try{
-    PreparedStatement p=conn.prepareStatement("update booking set TicketNo=?, FirstName=? ,SurName=?,Phone=?,Email=?,Gender=?,Travel=?,Departure=?,Price =?,where TicketNo="+view+";" );
-    p.setInt(1,Integer.parseInt(info[0]));
+                            System.out.println("The view is: "+view +" And info: "+info[1]);
+                            String query="update booking set TicketNo=?, FirstName=? ,SurName=?,Phone=?,Email=?,Gender=?,Travel=?,Departure=?,Price =?,where TicketNo ="+view+";";
+    PreparedStatement p=conn.prepareStatement(query);
+    p.setString(1,info[0]);
     p.setString(2,info[1]);
     p.setString(3,info[2]);
     p.setString(4,info[3] );
-    p.setString(5,info[4] );
+    p.setString(5,info[4] );  
     p.setString(6,info[5] );
     p.setString(7,info[6] );
     p.setString(8,info[7] );
     p.setDouble(9,Double.parseDouble(info[8]) );
-    
+    System.out.println("The view is: "+view +" And info2: "+info[1]);
     System.out.println("I tried to Update db");
     p.execute();  //use execute if no results expected back
+    p.close();
     }catch(Exception e){
         System.out.println("Error"+e.toString());
         return;        

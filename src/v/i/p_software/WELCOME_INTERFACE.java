@@ -108,8 +108,9 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here:
        
-        int ticketNo=Integer.parseInt(JOptionPane.showInputDialog(null, "Please put your Ticket Number."));
-        
+        String ticketNo=JOptionPane.showInputDialog(null, "Please put your Ticket Number.");
+        EditTicket edit=new EditTicket(ticketNo);
+        edit.setVisible(true);
     }//GEN-LAST:event_login_buttonActionPerformed
 
     /**

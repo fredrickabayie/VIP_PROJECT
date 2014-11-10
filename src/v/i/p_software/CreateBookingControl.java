@@ -41,7 +41,7 @@ public class CreateBookingControl {
     public void book(){
         try{
         PreparedStatement p=conn.prepareStatement("Insert Into Booking set TicketNo=?, FirstName=? ,SurName =?,Phone=?, Email=?,Gender=?,Travel=?,Departure=?,Price=?");
-    p.setInt(1,Integer.parseInt(details[0]));
+    p.setString(1,details[0]);
     p.setString(2,details[1]);
     p.setString(3,details[2]);
     p.setString(4,details[3]);
