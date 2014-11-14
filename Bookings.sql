@@ -1,27 +1,60 @@
+CREATE DATABASE  IF NOT EXISTS `bookings` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `bookings`;
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+--
+-- Host: 127.0.0.1    Database: bookings
+-- ------------------------------------------------------
+-- Server version	5.6.16
 
-select * from products;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-select * from studs;
+--
+-- Table structure for table `booking`
+--
 
-select * from passangers;
+DROP TABLE IF EXISTS `booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `booking` (
+  `TicketNo` varchar(255) NOT NULL,
+  `FirstName` varchar(255) NOT NULL DEFAULT 'FNAME',
+  `SurName` varchar(255) NOT NULL DEFAULT 'SNAME',
+  `Phone` varchar(255) NOT NULL DEFAULT '+233',
+  `Email` varchar(255) NOT NULL DEFAULT '@vip.gh',
+  `Gender` varchar(1) DEFAULT NULL,
+  `Travel` varchar(255) NOT NULL,
+  `Departure` varchar(255) DEFAULT NULL,
+  `Price` double DEFAULT NULL,
+  PRIMARY KEY (`TicketNo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-drop table passangers;
+--
+-- Dumping data for table `booking`
+--
 
-drop database passangers;
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES ('0','jadsjlkajo','lkjlkjlj','ijlkjlkj','lkjjlkj','I','Item 1','Item 1',1000);
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-Alter table Booking change price Price double;
-
-Alter table Booking change Gender Gender varchar(1);
-
-Alter table Booking change Departure Departure Varchar(255);
-Alter table Booking change Arrival Arrival Varchar(255);
-
-
-Alter table Booking drop Arrival;
-
-select * from Booking;
-
-
-
-
+-- Dump completed on 2014-11-09 22:44:51
