@@ -1,0 +1,32 @@
+[33mcommit 4db14f9f1bb6a9f0e667d8a187f983b27000ef67[m
+Author: David <dwainaina3@gmail.com>
+Date:   Mon Nov 10 11:21:54 2014 +0000
+
+    I committed after creating controllers for view and book
+
+[33mcommit 5fa0792b2594c51fc79eac8a867337f304195850[m
+Author: David <dwainaina3@gmail.com>
+Date:   Sun Nov 2 23:25:01 2014 +0000
+
+    My first commit
+
+[33mcommit bff7329778196c1387ff48ef863562c17fe5d1e0[m
+Merge: 190ab7d 98f27ec
+Author: fredrickabayie <fredrick.abayie@gmail.com>
+Date:   Sun Oct 26 17:46:22 2014 +0000
+
+    Merge pull request #1 from fredrickabayie/fredrickBranch
+    
+    This is a copy of what i have done soo far
+
+[33mcommit 98f27ec0615767928d176412d1b2d4501f32be83[m
+Author: fredrick.abayie <fredrick.abayie@gmail.com>
+Date:   Sun Oct 26 17:00:49 2014 +0000
+
+    This is a copy of what i have done soo far
+
+[33mcommit 190ab7d2f3f3e059f4a53ec3324ebcb57b53afd2[m
+Author: fredrickabayie <fredrick.abayie@gmail.com>
+Date:   Sun Oct 26 16:35:02 2014 +0000
+
+    Initial commit
