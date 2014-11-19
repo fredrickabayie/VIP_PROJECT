@@ -48,10 +48,16 @@ public class RouteTable {
                         routeTab.addRow (new VIPRoute(r.getString("BEGINNING"),r.getString("DESTINATION"),
                                 r.getString("DURATION"),r.getDouble("PRICE")).toArray());
               }
+            
           }catch(Exception e)
           {System.out.println(e.toString()+"error result0"); }  
       }
             
+      //get from and to
+      public Object getValueFromSelection(int row, int column)
+      {
+          return routeTab.getValueAt(row,column);
+      }
     //addrow
 //    public void addRow(String fro, String to, String tim, double pri)
 //    {      

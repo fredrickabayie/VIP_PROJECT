@@ -39,7 +39,8 @@ public class CreateBookingControl {
     //This method will add booking details into the database
     public void book(){
         try{
-        PreparedStatement p=conn.prepareStatement("Insert Into Booking set TicketNo=?, FirstName=? ,SurName =?,Phone=?, Email=?,Gender=?,Travel=?,Departure=?,Price=?");
+        PreparedStatement p=conn.prepareStatement("Insert Into Booking set TicketNo=?, FirstName=? ,SurName =?,Phone=?,"
+                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?");
     p.setString(1,details[0]);
     p.setString(2,details[1]);
     p.setString(3,details[2]);
