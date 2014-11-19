@@ -1,3 +1,5 @@
+package v.i.p_software;
+
 
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +19,7 @@ public class RouteTable {
     
     public RouteTable(){
         routeTab = new DefaultTableModel(new Object [][] {},
-            new String []{"FROM", "TO", "PRICE", "TIME"});
+            new String []{"FROM", "TO", "TIME", "PRICE"});
     }
        
       //connection to database
@@ -36,18 +38,18 @@ public class RouteTable {
       }
     
     //display routes in database
-      public void displayRoute(DefaultTableModel t){
+      public void retrieveRoute(){
           try {
             Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, 
                                      ResultSet.CONCUR_UPDATABLE);
-            java.sql.ResultSet r = s.executeQuery("SELECT * FROM Products");//all products   
+            java.sql.ResultSet r = s.executeQuery("SELECT * FROM route");//all products   
             
             while(r.next()) {
-                        t.addRow (new VIPRoute(r.getString("From"),r.getString("To"),
-                                r.getString("Time"),r.getDouble("Price")).toArray());
+                        routeTab.addRow (new VIPRoute(r.getString("BEGINNING"),r.getString("DESTINATION"),
+                                r.getString("DURATION"),r.getDouble("PRICE")).toArray());
               }
           }catch(Exception e)
-          {System.out.println("error result0"); }  
+          {System.out.println(e.toString()+"error result0"); }  
       }
             
     //addrow
