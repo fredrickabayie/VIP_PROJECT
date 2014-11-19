@@ -7,7 +7,6 @@
 package v.i.p_software;
 
 import java.sql.PreparedStatement;
-import java.util.Objects;
 
 /**
  *
@@ -26,7 +25,7 @@ public class CreateBookingControl {
         try {
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
 	conn = java.sql.DriverManager.getConnection(
-	"jdbc:mysql://localhost/Bookings?user=root&password=");
+	"jdbc:mysql://localhost/Bookings?user=root&password=root");
 	
 	}
 	catch (Exception e) {

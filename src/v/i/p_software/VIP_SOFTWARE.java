@@ -14,7 +14,11 @@ package v.i.p_software;
  */
 public class VIP_SOFTWARE {
 
+<<<<<<< HEAD
         /**
+=======
+    /**
+>>>>>>> origin/Adjoa
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -31,6 +35,7 @@ public class VIP_SOFTWARE {
                 }
             }
         } catch (ClassNotFoundException ex) {
+<<<<<<< HEAD
             java.util.logging.Logger.getLogger(WELCOME_INTERFACE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(WELCOME_INTERFACE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -38,6 +43,15 @@ public class VIP_SOFTWARE {
             java.util.logging.Logger.getLogger(WELCOME_INTERFACE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(WELCOME_INTERFACE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+=======
+            java.util.logging.Logger.getLogger(ADMIN_LOGIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ADMIN_LOGIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ADMIN_LOGIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ADMIN_LOGIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+>>>>>>> origin/Adjoa
         }
         //</editor-fold>
 
@@ -47,5 +61,9 @@ public class VIP_SOFTWARE {
                 new WELCOME_INTERFACE().setVisible(true);
             }
         });
+<<<<<<< HEAD
     }
+=======
+    }   
+>>>>>>> origin/Adjoa
 }
