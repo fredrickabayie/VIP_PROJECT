@@ -22,6 +22,7 @@ public class CreateBookingControl {
         
         
     }
+    //Method connects to the database
     public void connect(){
         try {
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -62,6 +63,7 @@ public class CreateBookingControl {
         
     }
     
+    //Sets the array values outside this class.
     public void setValues(int index,String ob){
         details[index]=ob;
     }
