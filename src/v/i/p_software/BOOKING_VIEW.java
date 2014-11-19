@@ -201,7 +201,7 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//The array in createBookingControl is initialized with values given by user
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         bookingControl.setValues(0,jLabel11.getText());//store the ticket Id

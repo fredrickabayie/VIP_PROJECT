@@ -20,6 +20,7 @@ public class ViewEditTicket {
     public ViewEditTicket(){
         connect();
     }
+    //Method to connect to the database
     public void connect(){
         try {
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -70,6 +71,7 @@ public class ViewEditTicket {
         view=s;
     }
     
+    //method to update the database after editing
     public void update(){
         
                 	try{
@@ -95,7 +97,7 @@ public class ViewEditTicket {
     }
     }
     
-    //Method to set Values in the array
+    //Method to set Values in the array. Its used outside this class when setting the array values
     public void setInfo(int index, String s){
         info[index]=s;
     }

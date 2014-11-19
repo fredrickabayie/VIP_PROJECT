@@ -41,8 +41,9 @@ ViewEditTicket view;
         jComboBox3.setSelectedItem(view.info[5]);
         jLabel9.setText(view.info[8]);
         jLabel11.setText(view.info[0]);
-        
-        jTextField1.setEditable(false);
+      //This makes all of the fields in the ticket edit view non-editable  
+        jTextField1.setEditable(false); 
+                
         jTextField2.setEditable(false);
         jTextField5.setEditable(false);
         jTextField4.setEditable(false);
@@ -55,7 +56,7 @@ ViewEditTicket view;
         
         
     }
-    //Method to make the Ticket View Editable
+    //Method to make the Ticket View Editable. Only some details are editable
     public void editTicketDetails(){
         jTextField1.setEditable(true);
         jTextField2.setEditable(true);
@@ -63,7 +64,7 @@ ViewEditTicket view;
         jTextField4.setEditable(true);            
         jComboBox3.setEnabled(true);
     }
-    //Methof to Save Changes
+    //Method to Save Changes
     public void saveChanges(){
         view.setInfo(1, jTextField1.getText());
         view.setInfo(3,jTextField2.getText());
