@@ -22,7 +22,7 @@ RouteTable tab;
      */
     public Table() {        
         tab = new RouteTable();  
-        tab.initialize("bookings", "root", "root");
+        tab.initialize("bookings", "root", "");
         tab.retrieveRoute();
         initComponents();   
                              

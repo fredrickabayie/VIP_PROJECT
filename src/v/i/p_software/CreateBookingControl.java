@@ -26,7 +26,7 @@ public class CreateBookingControl {
         try {
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
 	conn = java.sql.DriverManager.getConnection(
-	"jdbc:mysql://localhost/Bookings?user=root&password=root");
+	"jdbc:mysql://localhost/Bookings?user=root&password=");
 	
 	}
 	catch (Exception e) {
