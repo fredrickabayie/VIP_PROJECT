@@ -13,7 +13,7 @@ package v.i.p_software;
  */
 public class VIPRoute {
   /**
-   * DEclaring instance variables
+   * Declaring instance variables
    */
     private String to;
     private String from;
