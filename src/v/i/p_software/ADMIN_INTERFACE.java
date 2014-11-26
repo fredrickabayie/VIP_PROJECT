@@ -6,21 +6,37 @@
 
 package v.i.p_software;
 
-import java.awt.Color;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Vector;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author chokayg3
  */
 public class ADMIN_INTERFACE extends javax.swing.JFrame {
+    private final DefaultTableModel table_model;
+    private final JFileChooser filechooser;
+     private ObjectInputStream input;
+     private ObjectOutputStream output;
+     private final Vector vector;
 
     /**
      * Creates new form ADMIN_INTERFACE
      */
     public ADMIN_INTERFACE() {
-//        this.getContentPane().setBackground(Color.green);
         initComponents();
+        vector = new Vector ();
+        table_model = new DefaultTableModel (new Vector(), vector);
+        filechooser = new JFileChooser();
     }
 
     /**
@@ -205,11 +221,21 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         export_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         export_menuitem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/export-26.png"))); // NOI18N
         export_menuitem.setText("Export");
+        export_menuitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                export_menuitemActionPerformed(evt);
+            }
+        });
         jMenu1.add(export_menuitem);
 
         import_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         import_menuitem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/import-26.png"))); // NOI18N
         import_menuitem.setText("Import");
+        import_menuitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                import_menuitemActionPerformed(evt);
+            }
+        });
         jMenu1.add(import_menuitem);
 
         jMenuBar1.add(jMenu1);
@@ -342,6 +368,78 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         new About_Software().setVisible(true);
     }//GEN-LAST:event_about_menuitemActionPerformed
 
+    private void export_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_menuitemActionPerformed
+        // TODO add your handling code here:
+        save();
+    }//GEN-LAST:event_export_menuitemActionPerformed
+
+    private void import_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_import_menuitemActionPerformed
+        // TODO add your handling code here:
+        open();
+    }//GEN-LAST:event_import_menuitemActionPerformed
+
+    
+    /**
+     * A method to display the open filechooser dialog
+     */
+    private void open ( )
+    {
+        if ( filechooser.showOpenDialog ( this ) == JFileChooser.APPROVE_OPTION )
+            open ( filechooser.getSelectedFile ( ) );
+    }//End Of Method
+    
+    /**
+     * A method to get the file chosen and display the data
+     * @param file 
+     */
+    private void open ( File file )
+    {
+        try
+        {
+            input = new ObjectInputStream ( new FileInputStream ( file ) );
+            Vector rowData = ( Vector )input.readObject( );
+         Vector columnNames = ( Vector )input.readObject ( );
+         table_model.setDataVector ( rowData, columnNames );
+         input.close();
+         JOptionPane.showMessageDialog ( null, "Successfully Opened The File " +file.getName(), "OPENED", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch (IOException | ClassNotFoundException ex)
+        { 
+        JOptionPane.showMessageDialog(null, "Failed To Open File " +file.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch
+
+    }//End Of Method
+    
+    /**
+     * A method to display the save filechooser dialog
+     */
+    private void save ( )
+    {
+        if ( filechooser.showSaveDialog ( this ) == JFileChooser.APPROVE_OPTION )
+            save ( filechooser.getSelectedFile ( ) );
+    }//End Of Method
+    
+    /**
+     * A method to get the file name to save the data to a file
+     * @param file 
+     */
+    private void save ( File file )
+    {
+        try
+        {
+       output = new ObjectOutputStream ( new FileOutputStream (file)); 
+       output.writeObject(table_model.getDataVector());
+//         output.writeObject(getColumnNames());
+         output.close();
+         JOptionPane.showMessageDialog(null, "Data Saved Successfully To " +file.getName(), "SAVED", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch (IOException ex) 
+        { 
+            JOptionPane.showMessageDialog(null, "Failed To Save Data", "ERROR "+file.getName(), JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch 
+            
+        
+    }//End Of Method
     /**
      * @param args the command line arguments
      */

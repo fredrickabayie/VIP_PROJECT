@@ -132,10 +132,8 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WELCOME_INTERFACE().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new WELCOME_INTERFACE().setVisible(true);
         });
     }
 
