@@ -5,7 +5,10 @@
  */
 
 package v.i.p_software;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author David Wainaina
@@ -13,7 +16,7 @@ import java.sql.PreparedStatement;
 public class ViewEditTicket {
     java.sql.Connection conn = null;
     String view=null;
-    String [] info=new String[9];
+    String [] info=new String[10];
     
     
     //Constructor starts a connection upon creation of ViewEditTicket instance
@@ -54,7 +57,15 @@ public class ViewEditTicket {
                                info[6]=r.getString("Travel");
                                info[7]=r.getString("Departure");
                                info[8]=r.getString("Price");
-                                     
+                               
+                               Date date=r.getDate("travelDate");
+                               
+                               String dateString=date.toString();
+                               
+                               
+                               info[9]=dateString;
+                                 
+                               
                                                    
 		}
          s.close();       
@@ -76,7 +87,7 @@ public class ViewEditTicket {
         
                 	try{
                             System.out.println("The view is: "+view +" And info: "+info[1]);
-                            String query="update booking set TicketNo=?, FirstName=? ,SurName=?,Phone=?,Email=?,Gender=?,Travel=?,Departure=?,Price =?,where TicketNo ="+view+";";
+                            String query="update booking set TicketNo=?, FirstName=? ,SurName=?,Phone=?,Email=?,Gender=?,Travel=?,Departure=?,Price =?,travelDate=?,where TicketNo ="+view+";";
     PreparedStatement p=conn.prepareStatement(query);
     p.setString(1,info[0]);
     p.setString(2,info[1]);
@@ -87,6 +98,17 @@ public class ViewEditTicket {
     p.setString(7,info[6] );
     p.setString(8,info[7] );
     p.setDouble(9,Double.parseDouble(info[8]) );
+    
+     String str_date=info[9];
+    DateFormat formatter ; 
+     
+    java.util.Date utilDate = new java.util.Date();
+    formatter = new SimpleDateFormat("MM/dd/yy");
+    utilDate = formatter.parse(str_date);
+    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+    
+    p.setDate(10, sqlDate);
+    
     System.out.println("The view is: "+view +" And info2: "+info[1]);
     System.out.println("I tried to Update db");
     p.execute();  //use execute if no results expected back

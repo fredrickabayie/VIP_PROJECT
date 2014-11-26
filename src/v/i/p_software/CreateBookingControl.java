@@ -6,7 +6,12 @@
 
 package v.i.p_software;
 
+
+
 import java.sql.PreparedStatement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +19,8 @@ import java.sql.PreparedStatement;
  */
 public class CreateBookingControl {
     java.sql.Connection conn = null;
-    String [] details=new String[9];
+    String [] details=new String[10];
+    Date ticketDate=null;
     
     public CreateBookingControl(){
         connect();
@@ -38,10 +44,10 @@ public class CreateBookingControl {
         
     }
     //This method will add booking details into the database
-    public void book(){
+    public void book() throws ParseException{
         try{
         PreparedStatement p=conn.prepareStatement("Insert Into Booking set TicketNo=?, FirstName=? ,SurName =?,Phone=?,"
-                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?");
+                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?,TravelDate=?");
     p.setString(1,details[0]);
     p.setString(2,details[1]);
     p.setString(3,details[2]);
@@ -52,6 +58,15 @@ public class CreateBookingControl {
     p.setString(8,details[7]);
     p.setDouble(9,Double.parseDouble(details[8]));
     
+    
+     SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy");
+        Date parsed = format.parse(details[9]);
+        java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
+    
+   
+    p.setDate(10,sqlDate);
+    
+ 
     
    
     System.out.println("I tried to insert into db");
@@ -66,6 +81,11 @@ public class CreateBookingControl {
     //Sets the array values outside this class.
     public void setValues(int index,String ob){
         details[index]=ob;
+    }
+    
+    //Method to setDate;
+    public void setDate(Date d){
+        ticketDate=d;
     }
     
 }

@@ -6,24 +6,49 @@
 
 package v.i.p_software;
 
-import java.awt.Component;
-import v.i.p_software.CreateBookingControl;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
 /**
  *
  * @author chokayg3
  */
 public class BOOKING_VIEW extends javax.swing.JFrame {
     CreateBookingControl bookingControl;
-
+    long ticketId;
     /**
      * Creates new form BOOKING_VIEW
      */
     public BOOKING_VIEW() {
         initComponents();       
         bookingControl=new CreateBookingControl();
+        generateId();
+        id_number.setText(""+ ticketId);
+    }
+    
+    //Method to generate a ticket id
+    
+    public void generateId(){
         
-        
+        Scanner readFromFile=null;
+               
+    try{
+ //input=new Scanner(new File("Students.txt"));
+   readFromFile=new Scanner(new File("tid.txt"));
+}catch(FileNotFoundException e){
+ System.out.println(e.toString() +" Please be serious");
+}
+    
+    
+    while(readFromFile.hasNext()){
+        ticketId=Long.parseLong(readFromFile.next());
+    }
+    
+    readFromFile.close();
+    
     }
 
     /**
@@ -47,7 +72,6 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
         email = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         journey = new javax.swing.JTextField();
         browse = new javax.swing.JButton();
@@ -57,6 +81,8 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
         id_number = new javax.swing.JTextField();
         gender = new javax.swing.JComboBox();
         price = new javax.swing.JTextField();
+        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,9 +107,12 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
-
         jButton3.setText("Cancel");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         journey.setEditable(false);
         journey.setText("FROM-TO");
@@ -108,9 +137,11 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
 
         id_number.setEditable(false);
 
-        gender.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gender.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "F", "M" }));
 
         price.setEditable(false);
+
+        jLabel1.setText("Date");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,9 +155,11 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel8)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel1))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -136,17 +169,13 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                                 .addComponent(email))
                             .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(journey, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
+                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel9))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton2)
-                                        .addGap(19, 19, 19)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel9))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
@@ -158,9 +187,7 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                                             .addComponent(jButton3)
                                             .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(85, 85, 85))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(browse, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(browse, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton1))
                 .addGap(0, 64, Short.MAX_VALUE))
         );
@@ -200,10 +227,13 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                     .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addGap(59, 59, 59))
         );
@@ -212,21 +242,66 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 //The array in createBookingControl is initialized with values given by user
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+     if(validateInputs()==false){
+         JOptionPane.showMessageDialog(null," Please Validate your details"); 
+     }
+     else  {     
+        
         bookingControl.setValues(0,id_number.getText());//store the ticket Id
         bookingControl.setValues(1,fname.getText());//store the first name
-        bookingControl.setValues(2,sname.getText() );//store surname
+        bookingControl.setValues(2,sname.getText() );//store surname    
         bookingControl.setValues(3,phone_num.getText());//stores the phone number     
         bookingControl.setValues(4, email.getText());//stores the email address
         bookingControl.setValues(5,gender.getSelectedItem().toString() );//stores the Passanger's Gender           
-        bookingControl.setValues(6,journey.getText());       
-        bookingControl.setValues(7,time.getText());//time.setText((String)Table.timeValue)));//stores the departure time
+        bookingControl.setValues(6,journey.getText());   //Records the journey    
+        bookingControl.setValues(7,time.getText());//stores the departure time
         bookingControl.setValues(8,price.getText());//stores the ticket price
-      //  bookingControl.
-      //  bookingControl.book(); //The method inserts the stored details in the bookings database
+        String strDate = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        strDate=sdf.format(dateChooserCombo1.getSelectedDate().getTime());
+        bookingControl.setValues(9,strDate); //store the date as string
+          try{
+        bookingControl.book(); //The method inserts the stored details in the bookings database
+        }
+        catch (Exception e){
+            
+        }
+        PrintWriter updateId=null;
+      try{
+     updateId=new PrintWriter("tid.txt");
+    //output=new PrintWriter(new FileOutputStream("Students.txt",true));
+     } catch(FileNotFoundException e){
+     System.out.println("Please load a file!");
+     }
+      updateId.println(ticketId+1);  
+        
+        updateId.close();
+        
+        
+     
+        
+        dispose();
+     }
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public boolean validateInputs(){
+        boolean valid=true;
+        if(fname.getText()==null||sname.getText()==null||phone_num.getText()==null||gender.getSelectedItem().toString().equals("...")||email.getText()==null
+                ||journey.getText()==null){
+            valid=false;
+        }
+         try{
+          long phonenum=Long.parseLong(phone_num.getText().substring(1));
+            
+        }catch(Exception e){
+           
+       valid=false;
+        }
+        
+        return valid;
+    }
     private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
         // TODO add your handling code here:
         Table t = new Table();
@@ -236,6 +311,10 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
     private void journeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_journeyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_journeyActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+     dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,13 +354,14 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browse;
+    private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private javax.swing.JTextField email;
     private javax.swing.JTextField fname;
     private javax.swing.JComboBox gender;
     private javax.swing.JTextField id_number;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
