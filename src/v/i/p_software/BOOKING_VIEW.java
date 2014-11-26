@@ -7,20 +7,40 @@
 package v.i.p_software;
 
 import java.awt.Component;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author chokayg3
  */
 public class BOOKING_VIEW extends javax.swing.JFrame {
+CreateBookingControl bookingControl;
+long ticket_id;
+
 
     /**
      * Creates new form BOOKING_VIEW
      */
     public BOOKING_VIEW() {
         initComponents();
+        bookingControl = new CreateBookingControl ();
+//        generateId();
+        id_fileld.setText(""+ticket_id);
     }
 
+    
+//    public void generateId ()
+//    {
+//        Scanner readFromFile=null;
+//        try
+//        {
+//            readFromFile = new Scanner(new File("tid.txt"));
+//        }
+//        catch
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,8 +117,6 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/business_contact-26.png"))); // NOI18N
         jLabel1.setText("ID");
 
-        id_fileld.setText("BDMJIW");
-
         cancel_button.setText("Cancel");
         cancel_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,9 +155,9 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(first_field, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
+                                .addGap(48, 48, 48)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(surname_field, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,37 +203,35 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
                                                 .addGap(9, 9, 9)
                                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(208, 208, 208)
-                                .addComponent(jLabel1)
-                                .addGap(23, 23, 23)
-                                .addComponent(id_fileld, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel10)
-                                .addGap(326, 326, 326)
-                                .addComponent(jLabel9)
-                                .addGap(52, 52, 52)
-                                .addComponent(price_field, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel10)
+                        .addGap(326, 326, 326)
+                        .addComponent(jLabel9)
+                        .addGap(52, 52, 52)
+                        .addComponent(price_field, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 74, Short.MAX_VALUE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(submit_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cancel_button)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addComponent(id_fileld, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(207, 207, 207))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(id_fileld, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(30, 30, 30)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(id_fileld, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(first_field, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,6 +347,65 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
 
     private void submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_buttonActionPerformed
         // TODO add your handling code here:
+        if(validateInputs()==false){
+         JOptionPane.showMessageDialog(null," Please Validate your details"); 
+     }
+     else  {     
+        
+        bookingControl.setValues(0,id_field.getText());//store the ticket Id
+        bookingControl.setValues(1,first_field.getText());//store the first name
+        bookingControl.setValues(2,surname_field.getText() );//store surname    
+        bookingControl.setValues(3,phone_field.getText());//stores the phone number     
+        bookingControl.setValues(4,email_field.getText());//stores the email address
+        bookingControl.setValues(5,gender_combo.getSelectedItem().toString() );//stores the Passanger's Gender           
+        bookingControl.setValues(6,journey_field.getText());   //Records the journey    
+        bookingControl.setValues(7,time_field.getText());//stores the departure time
+        bookingControl.setValues(8,price_field.getText());//stores the ticket price
+        String strDate = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        strDate=sdf.format(dateChooserCombo1.getSelectedDate().getTime());
+        bookingControl.setValues(9,strDate); //store the date as string
+          try{
+        bookingControl.book(); //The method inserts the stored details in the bookings database
+        }
+        catch (Exception e){
+            
+        }
+//        PrintWriter updateId=null;
+//      try{
+////     updateId=new PrintWriter("tid.txt");
+//    //output=new PrintWriter(new FileOutputStream("Students.txt",true));
+//     } catch(FileNotFoundException e){
+//     System.out.println("Please load a file!");
+//     }
+////      updateId.println(ticketId+1);  
+//        
+//        updateId.close();
+        
+        
+     
+        
+        dispose();
+     }
+        
+        
+    }                                        
+
+    public boolean validateInputs(){
+        boolean valid=true;
+        if(first_field.getText()==null||surname_field.getText()==null||phone_field.getText()==null||gender_combo.getSelectedItem().toString().equals("...")||email_field.getText()==null
+                ||journey_field.getText()==null){
+            valid=false;
+        }
+         try{
+          long phonenum=Long.parseLong(phone_field.getText().substring(1));
+            
+        }catch(Exception e){
+           
+       valid=false;
+        }
+        
+        return valid;
     }//GEN-LAST:event_submit_buttonActionPerformed
 
     private void first_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_first_fieldActionPerformed
@@ -402,11 +477,11 @@ public class BOOKING_VIEW extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField journey_field;
+    public static javax.swing.JTextField journey_field;
     private javax.swing.JTextField phone_field;
-    private javax.swing.JLabel price_field;
+    public static javax.swing.JLabel price_field;
     private javax.swing.JButton submit_button;
     private javax.swing.JTextField surname_field;
-    private javax.swing.JLabel time_field;
+    public static javax.swing.JLabel time_field;
     // End of variables declaration//GEN-END:variables
 }

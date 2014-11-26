@@ -22,6 +22,8 @@ public class CreateBookingControl {
     String [] details=new String[10];
     Date ticketDate=null;
     
+    PersonCrud personDB = new PersonCrud();
+    
     public CreateBookingControl(){
         connect();
         
@@ -47,7 +49,7 @@ public class CreateBookingControl {
     public void book() throws ParseException{
         try{
         PreparedStatement p=conn.prepareStatement("Insert Into Booking set TicketNo=?, FirstName=? ,SurName =?,Phone=?,"
-                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?,TravelDate=?");
+                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?");
     p.setString(1,details[0]);
     p.setString(2,details[1]);
     p.setString(3,details[2]);
@@ -58,6 +60,9 @@ public class CreateBookingControl {
     p.setString(8,details[7]);
     p.setDouble(9,Double.parseDouble(details[8]));
     
+    //fn, sn, id, pn,g,e,age
+//    Person createdPerson = new Person(details[1], details[2], details[0], details[3], details[5], details[4]);
+//    personDB.addPerson(createdPerson);
     
      SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy");
         Date parsed = format.parse(details[9]);

@@ -2,7 +2,7 @@ package v.i.p_software;
 
 //import static v.i.p_software.BOOKING_VIEW.price_field;
 //import static v.i.p_software.BOOKING_VIEW.time_field;
-
+//import static v.i.p_software.BOOKING_VIEW.journey_field;
 
 
 
@@ -23,8 +23,8 @@ RouteTable tab;
      */
     public Table() {        
         tab = new RouteTable();  
-//        tab.initialize("bookings", "root", "");
-//        tab.retrieveRoute();
+        tab.initialize("bookings", "root", "Ashesi@2016?");
+        tab.retrieveRoute();
         initComponents();
     }
 
@@ -90,20 +90,22 @@ RouteTable tab;
         // TODO add your handling code here:
         
     }//GEN-LAST:event_tableMouseClicked
-//    static Object fromValue;
-//    static Object toValue;
-//    static Object timeValue;
-//    static Object priceValue;
+    
+    static Object fromValue;
+    static Object toValue;
+    static Object timeValue;
+    static Object priceValue;
+    
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         // TODO add your handling code here:
-//        int row = table.getSelectedRow();
-//        fromValue = tab.getValueFromSelection(row, 0);
-//        toValue = tab.getValueFromSelection(row, 1);        
-//        timeValue = tab.getValueFromSelection(row, 2);
-//        priceValue = tab.getValueFromSelection(row, 3);
-//        BOOKING_VIEW.journey_field.setText((String)Table.fromValue + " - "+ (String)Table.toValue);
-//        BOOKING_VIEW.time.setText((String)Table.timeValue);
-//        BOOKING_VIEW.price.setText(""+Table.priceValue);
+        int row = table.getSelectedRow();
+        fromValue = tab.getValueFromSelection(row, 0);
+        toValue = tab.getValueFromSelection(row, 1);        
+        timeValue = tab.getValueFromSelection(row, 2);
+        priceValue = tab.getValueFromSelection(row, 3);
+        BOOKING_VIEW.journey_field.setText((String)Table.fromValue + " - "+ (String)Table.toValue);
+        BOOKING_VIEW.time_field.setText((String)Table.timeValue);
+        BOOKING_VIEW.price_field.setText(""+Table.priceValue);
         dispose();
     }//GEN-LAST:event_save_buttonActionPerformed
 
