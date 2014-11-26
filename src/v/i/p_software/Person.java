@@ -18,6 +18,17 @@ public class Person {
     private String email;
     private int age;
     
+    //constructor
+    public Person(String fn, String sn, int id, int pn, char g, String e, int a){
+        firstName = fn;
+        surname = sn;
+        personID = id;
+        phoneNumber = pn;
+        gender = g;
+        email = e;
+        age = a;
+    }
+    
     void setAge(int a){
         age = a;
     }
