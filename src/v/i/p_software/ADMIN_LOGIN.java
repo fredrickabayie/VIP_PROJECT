@@ -6,8 +6,6 @@
 
 package v.i.p_software;
 
-import v.i.p_software.ADMIN_INTERFACE;
-
 /**
  *
  * @author chokayg3
@@ -114,6 +112,7 @@ public class ADMIN_LOGIN extends javax.swing.JFrame {
     private void admin_login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_login_buttonActionPerformed
         // TODO add your handling code here:
         new ADMIN_INTERFACE().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_admin_login_buttonActionPerformed
 
     /**
@@ -144,10 +143,8 @@ public class ADMIN_LOGIN extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ADMIN_LOGIN().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ADMIN_LOGIN().setVisible(true);
         });
     }
 

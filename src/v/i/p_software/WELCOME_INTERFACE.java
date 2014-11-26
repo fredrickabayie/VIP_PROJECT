@@ -7,6 +7,7 @@
 package v.i.p_software;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 
 /**
  *
@@ -31,73 +32,77 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        admin_button = new javax.swing.JToggleButton();
-        createbooking_button = new javax.swing.JToggleButton();
-        login_button = new javax.swing.JToggleButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        newbooking_button = new javax.swing.JButton();
+        admin_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WELCOME");
+        setIconImage(Toolkit.getDefaultToolkit ( ).getImage(getClass().getResource("vip-48.png")));
         setType(java.awt.Window.Type.UTILITY);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
-        jLabel2.setText("WELCOME TO VIP STATION");
+        jPanel1.setLayout(null);
 
-        admin_button.setMnemonic('A');
-        admin_button.setText("Admin");
-        admin_button.setToolTipText("");
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\fred\\Desktop\\VIP_PROJECT\\VIP_PROJECT\\src\\v\\i\\p_software\\vipwelcome.png")); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(-10, 0, 700, 380);
 
-        createbooking_button.setText("Create Booking");
-        createbooking_button.addActionListener(new java.awt.event.ActionListener() {
+        newbooking_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\fred\\Pictures\\add_user-48.png")); // NOI18N
+        newbooking_button.setMnemonic('N');
+        newbooking_button.setText("New Booking");
+        newbooking_button.setToolTipText("Create a new booking by entering your details");
+        newbooking_button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newbooking_button.setRolloverEnabled(true);
+        newbooking_button.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        newbooking_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createbooking_buttonActionPerformed(evt);
+                newbooking_buttonActionPerformed(evt);
             }
         });
+        jPanel1.add(newbooking_button);
+        newbooking_button.setBounds(70, 150, 110, 80);
 
-        login_button.setText("Login");
+        admin_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\fred\\Pictures\\administrator2-48.png")); // NOI18N
+        admin_button.setMnemonic('A');
+        admin_button.setText("Administrator");
+        admin_button.setToolTipText("Restricted to only admin only");
+        admin_button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        admin_button.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        admin_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                admin_buttonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(admin_button);
+        admin_button.setBounds(500, 150, 110, 80);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(createbooking_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(login_button)
-                .addGap(93, 93, 93))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(309, 309, 309)
-                        .addComponent(admin_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel2)))
-                .addContainerGap(25, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createbooking_button)
-                    .addComponent(login_button))
-                .addGap(63, 63, 63)
-                .addComponent(admin_button)
-                .addGap(56, 56, 56))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createbooking_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createbooking_buttonActionPerformed
+    private void newbooking_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newbooking_buttonActionPerformed
         // TODO add your handling code here:
-        new BOOKING_VIEW().setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_createbooking_buttonActionPerformed
+        new BOOKING_VIEW().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_newbooking_buttonActionPerformed
+
+    private void admin_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_buttonActionPerformed
+        // TODO add your handling code here:
+        new ADMIN_LOGIN().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_admin_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,17 +132,15 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WELCOME_INTERFACE().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new WELCOME_INTERFACE().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton admin_button;
-    private javax.swing.JToggleButton createbooking_button;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JToggleButton login_button;
+    private javax.swing.JButton admin_button;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton newbooking_button;
     // End of variables declaration//GEN-END:variables
 }
