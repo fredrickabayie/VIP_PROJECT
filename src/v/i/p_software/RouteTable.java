@@ -58,12 +58,34 @@ public class RouteTable {
       {
           return routeTab.getValueAt(row,column);
       }
+      
     //addrow
-//    public void addRow(String fro, String to, String tim, double pri)
-//    {      
-//        routeTab.addRow(new VIPRoute(fro, to, tim, pri).toArray());
-//    }    
+    public void addRow(String fro, String to, String tim, double pri)
+    {      
+        routeTab.addRow(new VIPRoute(fro, to, tim, pri).toArray());
+    }    
     
+    //add empty row
+    public void addEmptyRow(int row){
+        Object rowData [] = {};
+        routeTab.insertRow(row, rowData);
+    }
+    
+    //addDB
+    public void addToDb(Object from, Object to, Object time, Object price)
+    {
+         try{
+                  PreparedStatement p=conn.prepareStatement("Insert Into route set FROM = ?, TO=?, TIME=? ,PRICE =?");
+                  p.setString(1, (String)from);
+                  p.setString(2, (String)to);
+                  p.setString(3, (String)time);
+                  p.setDouble(4, (Double)price);
+                  p.execute();  //use execute if no results expected back
+            }catch(Exception e){
+                // JOptionPane.showMessageDialog(null, "Error "+e.toString());
+                //  return;        
+            }
+    }
     //delete row
     public void deleteRow(int index)
     {

@@ -1,5 +1,7 @@
 package v.i.p_software;
 
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 import static v.i.p_software.BOOKING_VIEW.price;
 import static v.i.p_software.BOOKING_VIEW.time;
 import static v.i.p_software.RouteTable.routeTab;
@@ -52,6 +54,7 @@ RouteTable tab;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         table.setModel(RouteTable.routeTab);
+        table.setCellSelectionEnabled(true);
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableMouseClicked(evt);
@@ -164,11 +167,14 @@ RouteTable tab;
         toValue = routeTab.getValueAt(row, 2);
         timeValue = routeTab.getValueAt(row, 3);
         priceValue = routeTab.getValueAt(row, 4);
+        tab.addRow(((String)fromValue),((String)toValue),((String)timeValue),(Double) priceValue);
+        tab.addToDb(fromValue,toValue,timeValue,priceValue);
     }//GEN-LAST:event_addActionPerformed
 
     private void addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRowActionPerformed
         // TODO add your handling code here:
-        tab.addEmptyRow();
+        int row = table.getSelectedRow();
+        tab.addEmptyRow(row);
     }//GEN-LAST:event_addRowActionPerformed
 
     /**
