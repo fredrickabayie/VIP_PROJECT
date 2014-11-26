@@ -25,7 +25,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
+<<<<<<< HEAD
               <Component id="save" min="-2" max="-2" attributes="0"/>
+=======
+              <Component id="save_button" min="-2" max="-2" attributes="0"/>
+>>>>>>> de1ffc8f3863ed34260fa16d95905db59da89ebb
               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -41,7 +45,11 @@
               <EmptySpace pref="23" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="222" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <Component id="save" min="-2" max="-2" attributes="0"/>
+=======
+              <Component id="save_button" min="-2" max="-2" attributes="0"/>
+>>>>>>> de1ffc8f3863ed34260fa16d95905db59da89ebb
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -67,12 +75,20 @@
         </Component>
       </SubComponents>
     </Container>
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="save">
+=======
+    <Component class="javax.swing.JButton" name="save_button">
+>>>>>>> de1ffc8f3863ed34260fa16d95905db59da89ebb
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
+<<<<<<< HEAD
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveActionPerformed"/>
+=======
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="save_buttonActionPerformed"/>
+>>>>>>> de1ffc8f3863ed34260fa16d95905db59da89ebb
       </Events>
     </Component>
   </SubComponents>

@@ -2,8 +2,13 @@ package v.i.p_software;
 
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
+<<<<<<< HEAD
 import static v.i.p_software.BOOKING_VIEW.price;
 import static v.i.p_software.BOOKING_VIEW.time;
+=======
+//import static v.i.p_software.BOOKING_VIEW.price;
+//import static v.i.p_software.BOOKING_VIEW.time;
+>>>>>>> de1ffc8f3863ed34260fa16d95905db59da89ebb
 import static v.i.p_software.RouteTable.routeTab;
 
 

@@ -6,19 +6,49 @@
 
 package v.i.p_software;
 
-import java.awt.Color;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Vector;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author chokayg3
  */
 public class ADMIN_INTERFACE extends javax.swing.JFrame {
+    private final DefaultTableModel table_model;
+    private final JFileChooser filechooser;
+     private ObjectInputStream input;
+     private ObjectOutputStream output;
+     private final Vector vector;
 
     /**
      * Creates new form ADMIN_INTERFACE
      */
     public ADMIN_INTERFACE() {
-//        this.getContentPane().setBackground(Color.green);
+        
+        vector = new Vector ();
+        vector.add("TICKET NUMBER");
+        vector.add("FIRSTNAME");
+        vector.add("SURNAME");
+        vector.add("PHONE");
+        vector.add("EMAIL");
+        vector.add("GENDER");
+        vector.add("JOURNEY");
+        vector.add("TIME");
+        vector.add("TRAVEL DATE");
+        vector.add("PRICE");
+//        vector.add("");
+//        vector.add("");
+        table_model = new DefaultTableModel (new Vector(), vector);
+        filechooser = new JFileChooser();
         initComponents();
     }
 
@@ -32,6 +62,8 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -55,7 +87,6 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JToolBar.Separator();
         jButton10 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         new_menuitem = new javax.swing.JMenuItem();
@@ -82,17 +113,25 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ADMINISTRATOR");
+        setIconImage(Toolkit.getDefaultToolkit ( ).getImage(getClass().getResource("vip-48.png")));
+
+        jTable1.setModel(table_model);
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1234, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 65, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+        jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jToolBar1.setRollover(true);
 
@@ -190,9 +229,6 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jToolBar1.add(jButton10);
         jToolBar1.add(jTextField1);
 
-        jLabel6.setFont(new java.awt.Font("Khmer UI", 1, 48)); // NOI18N
-        jLabel6.setText("    WELCOME TO V I P ADMINISTRATOR INTERFACE");
-
         jMenu1.setMnemonic('F');
         jMenu1.setText("File");
 
@@ -203,11 +239,21 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         export_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         export_menuitem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/export-26.png"))); // NOI18N
         export_menuitem.setText("Export");
+        export_menuitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                export_menuitemActionPerformed(evt);
+            }
+        });
         jMenu1.add(export_menuitem);
 
         import_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         import_menuitem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/import-26.png"))); // NOI18N
         import_menuitem.setText("Import");
+        import_menuitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                import_menuitemActionPerformed(evt);
+            }
+        });
         jMenu1.add(import_menuitem);
 
         jMenuBar1.add(jMenu1);
@@ -314,21 +360,14 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPane1)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1234, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(179, 179, 179)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -340,6 +379,78 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         new About_Software().setVisible(true);
     }//GEN-LAST:event_about_menuitemActionPerformed
 
+    private void export_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_menuitemActionPerformed
+        // TODO add your handling code here:
+        save();
+    }//GEN-LAST:event_export_menuitemActionPerformed
+
+    private void import_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_import_menuitemActionPerformed
+        // TODO add your handling code here:
+        open();
+    }//GEN-LAST:event_import_menuitemActionPerformed
+
+    
+    /**
+     * A method to display the open filechooser dialog
+     */
+    private void open ( )
+    {
+        if ( filechooser.showOpenDialog ( this ) == JFileChooser.APPROVE_OPTION )
+            open ( filechooser.getSelectedFile ( ) );
+    }//End Of Method
+    
+    /**
+     * A method to get the file chosen and display the data
+     * @param file 
+     */
+    private void open ( File file )
+    {
+        try
+        {
+            input = new ObjectInputStream ( new FileInputStream ( file ) );
+            Vector rowData = ( Vector )input.readObject( );
+         Vector columnNames = ( Vector )input.readObject ( );
+         table_model.setDataVector ( rowData, columnNames );
+         input.close();
+         JOptionPane.showMessageDialog ( null, "Successfully Opened The File " +file.getName(), "OPENED", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch (IOException | ClassNotFoundException ex)
+        { 
+        JOptionPane.showMessageDialog(null, "Failed To Open File " +file.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch
+
+    }//End Of Method
+    
+    /**
+     * A method to display the save filechooser dialog
+     */
+    private void save ( )
+    {
+        if ( filechooser.showSaveDialog ( this ) == JFileChooser.APPROVE_OPTION )
+            save ( filechooser.getSelectedFile ( ) );
+    }//End Of Method
+    
+    /**
+     * A method to get the file name to save the data to a file
+     * @param file 
+     */
+    private void save ( File file )
+    {
+        try
+        {
+       output = new ObjectOutputStream ( new FileOutputStream (file)); 
+       output.writeObject(table_model.getDataVector());
+//         output.writeObject(getColumnNames());
+         output.close();
+         JOptionPane.showMessageDialog(null, "Data Saved Successfully To " +file.getName(), "SAVED", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch (IOException ex) 
+        { 
+            JOptionPane.showMessageDialog(null, "Failed To Save Data", "ERROR "+file.getName(), JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch 
+            
+        
+    }//End Of Method
     /**
      * @param args the command line arguments
      */
@@ -402,7 +513,6 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -414,11 +524,13 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem keyboard_menuitem;
