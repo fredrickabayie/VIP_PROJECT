@@ -12,7 +12,7 @@ package v.i.p_software;
 public class Person {
     private String firstName;
     private String surname;
-    private String personID;
+    private int personID;
     private int phoneNumber;
     private char gender;
     private String email;
@@ -25,7 +25,7 @@ public class Person {
         surname = sn;
     }
     
-    void setID(String id) {
+    void setID(int id) {
         personID = id;
     }
     
@@ -49,7 +49,7 @@ public class Person {
         return surname;
     }
     
-    String getID() {
+    int getID() {
         return personID;
     }
     
@@ -61,7 +61,7 @@ public class Person {
         return gender;
     }
     
-    String setEmail() {
+    String getEmail() {
         return email;
     }
     
