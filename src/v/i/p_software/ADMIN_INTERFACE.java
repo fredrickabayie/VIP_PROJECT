@@ -10,12 +10,9 @@ import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,21 +36,21 @@ import javax.swing.table.DefaultTableModel;
  * @author chokayg3
  */
 public class ADMIN_INTERFACE extends javax.swing.JFrame {
-    private final DefaultTableModel table_model;
+    public static DefaultTableModel table_model;
     private final JFileChooser filechooser;
-//     private ObjectInputStream input;
-//     private ObjectOutputStream output;
      private final Vector vector;
      RouteTable tab;
      PrintWriter print;
      Scanner input;
      Connection connection;
+     Admin_Controller admincontrol = new Admin_Controller();
 
     /**
      * Creates new form ADMIN_INTERFACE
      */
     public ADMIN_INTERFACE() {
         tab = new RouteTable();
+        
         tab.initialize("bookings", "root", "Ashesi@2016?");
         vector = new Vector ();
         vector.add("TICKET NUMBER");
@@ -70,6 +67,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         table_model = new DefaultTableModel (new Vector(), vector);
         filechooser = new JFileChooser();
         initComponents();
+        
     }
 
     /**
@@ -499,69 +497,22 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
 
     private void display_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_display_menuitemActionPerformed
         // TODO add your handling code here:
-        table_model.setRowCount(0);        
-        try 
-        {
-             Statement statement = connection.createStatement ( );
-             ResultSet resultSet = statement.executeQuery ( "SELECT * FROM booking" );
-         while ( resultSet.next ( ) )
-         {
-             Object [] w = {resultSet.getString ( "TicketNo" ),resultSet.getString ( "FirstName" ),resultSet.getString ( "SurName" ),
-             resultSet.getString ( "Phone" ),resultSet.getString ( "Email" ), resultSet.getString ( "Gender" ),resultSet.getString ( "Travel" ),
-             resultSet.getString ( "Departure" ),resultSet.getString ( "Price" ),resultSet.getString ( "Traveldate" ),resultSet.getString ( "Age" )};
-             table_model.addRow(w);
-             //System.out.println(table_model.getRowCount());
-         }//End Of While
-         JOptionPane.showMessageDialog(null, "Successfully Dispalyed The Data In The DataBase", "Displayed", JOptionPane.INFORMATION_MESSAGE);     
-         
-        }//End Of Try
-        catch ( SQLException e ) 
-        {
-        JOptionPane.showMessageDialog(null, "Failed To Display The Data In The DataBase", "Failed", JOptionPane.ERROR_MESSAGE);
-        }//End Of Catch
+        admincontrol.display();
     }//GEN-LAST:event_display_menuitemActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        try
-        {
-            Class.forName ( "com.mysql.jdbc.Driver" ).newInstance ( );
-             connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/bookings?user=root&password=Ashesi@2016?");
-             JOptionPane.showMessageDialog(null, "Successfully Connected To The DataBase", "Connected", JOptionPane.INFORMATION_MESSAGE);
-        }//End Of Try
-        catch ( ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e )
-        {
-            JOptionPane.showMessageDialog(null, "Failed To Connect To The DataBase", "Not Connected", JOptionPane.ERROR_MESSAGE);
-            System.out.println ( "Not Connected " + e.toString ( ) );
-        }//End Of Catch
+        admincontrol.initialize();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void delete_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_menuitemActionPerformed
         // TODO add your handling code here:
-               int row=admin_table.getSelectedRow();
-        int deleteThis=Integer.parseInt((String)admin_table.getValueAt(row,0));
-         try
-        {
-            PreparedStatement pStatement = connection.prepareStatement ( "Delete From booking Where TicketNo="+deleteThis+";" );
-           // for (int i = 0; i < table_model.getRowCount(); i++)
-           // {
-           // pStatement.setString( 1, (String) admin_table.getValueAt(i,0) );
-           // pStatement.executeUpdate( );
-            pStatement.execute();
-           //}//End Of For
-        JOptionPane.showMessageDialog(null, "Successfully Deleted The Data From The DataBase", "Deleted", JOptionPane.INFORMATION_MESSAGE);
-        }//End Of Try
-        catch ( SQLException e )
-        {
-            System.out.println(e.toString());
-            JOptionPane.showMessageDialog(null, "Failed To Delete The Data From The DataBase", "Not Deleted", JOptionPane.ERROR_MESSAGE);
-        }//End Of Catch
+        admincontrol.delete();
     }//GEN-LAST:event_delete_menuitemActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if ( admin_table.getSelectedRow ( ) >= 0 )
-            table_model.removeRow ( admin_table.getSelectedRow ( ) );
+        admincontrol.deleteRow();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -576,79 +527,25 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
 
     private void update_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_menuitemActionPerformed
         // TODO add your handling code here:
-         try
-        {
-            PreparedStatement pStatement = connection.prepareStatement("Update booking set FirstName=? ,SurName=?,Phone=?, "
-                    + "Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?, Age=? where TicketNo=?");
-            
-         for ( int i = 0; i < table_model.getRowCount(); i++ )
-            {
-            
-            pStatement.setString ( 1, (String) admin_table.getValueAt(i,1) );
-            pStatement.setString ( 2, (String) admin_table.getValueAt(i,2) );
-            pStatement.setString ( 3, (String) admin_table.getValueAt(i,3) );
-            pStatement.setString ( 4, (String) admin_table.getValueAt(i,4) );
-            pStatement.setString ( 5, (String) admin_table.getValueAt(i,5) );
-            pStatement.setString ( 6, (String) admin_table.getValueAt(i,6) );
-            pStatement.setString ( 7, (String) admin_table.getValueAt(i,7) );
-            pStatement.setString ( 8, (String) admin_table.getValueAt(i,8) );
-            
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date parsed = format.parse( (String) admin_table.getValueAt(i, 9)); 
-            java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
-            System.out.println((String)admin_table.getValueAt(i, 9));
-        
-            pStatement.setDate ( 9, sqlDate );
-            pStatement.setInt ( 10, Integer.parseInt((String)admin_table.getValueAt(i,10)) );
-            pStatement.setString ( 11, (String) admin_table.getValueAt(i,0) );
-            System.out.println((String)admin_table.getValueAt(i, 0));
-            System.out.println((String)admin_table.getValueAt(i, 10));
-            pStatement.executeUpdate ( );
-            pStatement.execute();
-            }//End Of For
-            JOptionPane.showMessageDialog(null, "Successfully Updated The Data To The DataBase", "Updated", JOptionPane.INFORMATION_MESSAGE);
-        }//End Of Try
-        catch ( SQLException e )
-        {
-            System.out.println("the error"+e.toString());
-            JOptionPane.showMessageDialog(null, "Failed To Update The Data To The DataBase", "Failed", JOptionPane.ERROR_MESSAGE);
-        } catch (ParseException ex) {
-            Logger.getLogger(ADMIN_INTERFACE.class.getName()).log(Level.SEVERE, null, ex);
-        }//End Of Catch
+        admincontrol.update();
     }//GEN-LAST:event_update_menuitemActionPerformed
 
     private void addrow_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addrow_menuitemActionPerformed
-        // TODO add your handling code here:
-        if ( admin_table.getSelectedRow ( ) >= 0 )
-        table_model.insertRow ( admin_table.getSelectedRow ( ), new Vector ( ) );
-        else
-        table_model.addRow ( new Vector( ) );
+        admincontrol.addRow();
     }//GEN-LAST:event_addrow_menuitemActionPerformed
 
     private void deleterow_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleterow_menuitemActionPerformed
         // TODO add your handling code here:
-        if ( admin_table.getSelectedRow ( ) >= 0 )
-            table_model.removeRow ( admin_table.getSelectedRow ( ) );
+        admincontrol.deleteRow();
     }//GEN-LAST:event_deleterow_menuitemActionPerformed
 
     private void clear_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_menuitemActionPerformed
         // TODO add your handling code here:
-        table_model.setRowCount(0);
+        admincontrol.clearTable();
     }//GEN-LAST:event_clear_menuitemActionPerformed
 
     private void connectdatabase_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectdatabase_menuitemActionPerformed
-        // TODO add your handling code here:
-        try
-        {
-            Class.forName ( "com.mysql.jdbc.Driver" ).newInstance ( );
-             connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/bookings?user=root&password=Ashesi@2016?");
-             JOptionPane.showMessageDialog(null, "Successfully Connected To The DataBase", "Connected", JOptionPane.INFORMATION_MESSAGE);
-        }//End Of Try
-        catch ( ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e )
-        {
-            JOptionPane.showMessageDialog(null, "Failed To Connect To The DataBase", "Not Connected", JOptionPane.ERROR_MESSAGE);
-            System.out.println ( "Not Connected " + e.toString ( ) );
-        }//End Of Catch
+        admincontrol.initialize();
     }//GEN-LAST:event_connectdatabase_menuitemActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -657,103 +554,17 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
 
     private void insert_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_menuItemActionPerformed
         // TODO add your handling code here:
-         try
-        {
-            PreparedStatement pStatement = connection.prepareStatement("Insert into booking set TicketNo=?, FirstName=? ,SurName=?,Phone=?,"
-                    + "Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?, Age=?");
-            
-         for ( int i = 0; i < table_model.getRowCount();i++)
-            {
-                System.out.println(table_model.getRowCount() + "doing this row ");
-            pStatement.setString ( 1, (String) admin_table.getValueAt(i,0) );
-            System.out.println("this is ha!! "+i);
-            pStatement.setString ( 2, (String) admin_table.getValueAt(i,1) );
-            pStatement.setString ( 3, (String) admin_table.getValueAt(i,2) );
-            pStatement.setString ( 4, (String) admin_table.getValueAt(i,3) );
-            pStatement.setString ( 5, (String) admin_table.getValueAt(i,4) );
-            pStatement.setString ( 6, (String) admin_table.getValueAt(i,5) );
-            pStatement.setString ( 7, (String) admin_table.getValueAt(i,6) );
-            pStatement.setString ( 8, (String) admin_table.getValueAt(i,7) );
-            pStatement.setString ( 9, (String) admin_table.getValueAt(i,8) );
-            
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date parsed = format.parse( (String) admin_table.getValueAt(i, 9)); 
-            java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
-//            System.out.println((String)admin_table.getValueAt(i, 9));
-        
-            pStatement.setDate ( 10, sqlDate );
-            pStatement.setInt ( 11, Integer.parseInt((String)admin_table.getValueAt(i,10)) );
-            
-//            System.out.println((String)admin_table.getValueAt(i, 0));
-//            System.out.println((String)admin_table.getValueAt(i, 10));
-           // pStatement.executeUpdate ( );
-            try{
-            pStatement.execute();
-            System.out.println("Inserted this " + i );
-            } catch(Exception e){
-                
-            }
-            
-//            i++;
-            }//End Of For
-            JOptionPane.showMessageDialog(null, "Successfully Updated The Data To The DataBase", "Updated", JOptionPane.INFORMATION_MESSAGE);
-        }//End Of Try
-        catch ( SQLException e )
-        {
-            System.out.println("the error"+e.toString());
-            JOptionPane.showMessageDialog(null, "Failed To Update The Data To The DataBase", "Failed", JOptionPane.ERROR_MESSAGE);
-        } catch (ParseException ex) {
-            Logger.getLogger(ADMIN_INTERFACE.class.getName()).log(Level.SEVERE, null, ex);
-        }//End Of Catch
+        admincontrol.insert();
     }//GEN-LAST:event_insert_menuItemActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        
-        int row=admin_table.getSelectedRow();
-        int deleteThis=Integer.parseInt((String)admin_table.getValueAt(row,0));
-         try
-        {
-            PreparedStatement pStatement = connection.prepareStatement ( "Delete From booking Where TicketNo="+deleteThis+";" );
-           // for (int i = 0; i < table_model.getRowCount(); i++)
-           // {
-           // pStatement.setString( 1, (String) admin_table.getValueAt(i,0) );
-           // pStatement.executeUpdate( );
-            pStatement.execute();
-           //}//End Of For
-        JOptionPane.showMessageDialog(null, "Successfully Deleted The Data From The DataBase", "Deleted", JOptionPane.INFORMATION_MESSAGE);
-        }//End Of Try
-        catch ( SQLException e )
-        {
-            System.out.println(e.toString());
-            JOptionPane.showMessageDialog(null, "Failed To Delete The Data From The DataBase", "Not Deleted", JOptionPane.ERROR_MESSAGE);
-        }//End Of Catch
-         if ( admin_table.getSelectedRow ( ) >= 0 )
-            table_model.removeRow ( admin_table.getSelectedRow ( ) );
+        admincontrol.delete();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-         table_model.setRowCount(0);        
-        try 
-        {
-             Statement statement = connection.createStatement ( );
-             ResultSet resultSet = statement.executeQuery ( "SELECT * FROM booking" );
-         while ( resultSet.next ( ) )
-         {
-             Object [] w = {resultSet.getString ( "TicketNo" ),resultSet.getString ( "FirstName" ),resultSet.getString ( "SurName" ),
-             resultSet.getString ( "Phone" ),resultSet.getString ( "Email" ), resultSet.getString ( "Gender" ),resultSet.getString ( "Travel" ),
-             resultSet.getString ( "Departure" ),resultSet.getString ( "Price" ),resultSet.getString ( "Traveldate" ),resultSet.getString ( "Age" )};
-             table_model.addRow(w);
-             //System.out.println(table_model.getRowCount());
-         }//End Of While
-         JOptionPane.showMessageDialog(null, "Successfully Dispalyed The Data In The DataBase", "Displayed", JOptionPane.INFORMATION_MESSAGE);     
-         
-        }//End Of Try
-        catch ( SQLException e ) 
-        {
-        JOptionPane.showMessageDialog(null, "Failed To Display The Data In The DataBase", "Failed", JOptionPane.ERROR_MESSAGE);
-        }//End Of Catch
+        admincontrol.display();
     }//GEN-LAST:event_jButton9ActionPerformed
 
      /**
@@ -904,7 +715,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_menuitem;
     private javax.swing.JMenuItem addrow_menuitem;
-    private javax.swing.JTable admin_table;
+    public static javax.swing.JTable admin_table;
     private javax.swing.JMenuItem clear_menuitem;
     private javax.swing.JMenuItem connectdatabase_menuitem;
     private javax.swing.JMenuItem delete_menuitem;
