@@ -5,6 +5,13 @@
  */
 package v.i.p_software;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,9 +20,12 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.Scanner;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static v.i.p_software.ADMIN_INTERFACE.admin_table;
 import static v.i.p_software.ADMIN_INTERFACE.table_model;
@@ -25,7 +35,11 @@ import static v.i.p_software.ADMIN_INTERFACE.table_model;
  * @author chokayg3
  */
 public class Admin_Controller {
-    Connection connection;    
+    Connection connection; 
+    Scanner input;
+    JFileChooser filechooser;
+    PrintWriter print;
+ 
     
     public void initialize()
     {
@@ -55,10 +69,8 @@ public class Admin_Controller {
              resultSet.getString ( "Phone" ),resultSet.getString ( "Email" ), resultSet.getString ( "Gender" ),resultSet.getString ( "Travel" ),
              resultSet.getString ( "Departure" ),resultSet.getString ( "Price" ),resultSet.getString ( "Traveldate" ),resultSet.getString ( "Age" )};
              ADMIN_INTERFACE.table_model.addRow(w);
-             //System.out.println(table_model.getRowCount());
          }//End Of While
          JOptionPane.showMessageDialog(null, "Successfully Dispalyed The Data In The DataBase", "Displayed", JOptionPane.INFORMATION_MESSAGE);     
-         
         }//End Of Try
         catch ( SQLException e ) 
         {
@@ -73,12 +85,7 @@ public class Admin_Controller {
          try
         {
             PreparedStatement pStatement = connection.prepareStatement ( "Delete From booking Where TicketNo="+deleteThis+";" );
-           // for (int i = 0; i < table_model.getRowCount(); i++)
-           // {
-           // pStatement.setString( 1, (String) admin_table.getValueAt(i,0) );
-           // pStatement.executeUpdate( );
             pStatement.execute();
-           //}//End Of For
         JOptionPane.showMessageDialog(null, "Successfully Deleted The Data From The DataBase", "Deleted", JOptionPane.INFORMATION_MESSAGE);
         }//End Of Try
         catch ( SQLException e )
@@ -193,4 +200,59 @@ public class Admin_Controller {
         else
         table_model.addRow ( new Vector( ) );
     }
+           
+    public void open(File file)
+    {
+        String splitHere=",";
+        try
+        {
+            input = new Scanner ( new BufferedReader ( new FileReader( file )));
+            input.nextLine();
+            while (input.hasNextLine()){
+             String [] oneTicket=input.nextLine().split(splitHere);
+                Vector row=new Vector();
+                for(int i=0;i<oneTicket.length;i++){
+                    row.add(oneTicket[i]);
+                }
+                table_model.addRow(row);
+            }
+         input.close();
+         JOptionPane.showMessageDialog ( null, "Successfully Opened The File " +file.getName(), "OPENED", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch (IOException ex)
+        { 
+        JOptionPane.showMessageDialog(null, "Failed To Open File " +file.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch
+    }
+    
+    public Vector getColumnNames()
+    {
+         Vector <String> vector = new Vector < > ( );
+        for ( int i=0; i < admin_table.getColumnCount ( ); i++ )
+            vector.add ( admin_table.getColumnName ( i ) );
+        return vector;
+    }
+    
+    public void save (File file)
+    {
+        try
+        {
+            print = new PrintWriter ( new BufferedWriter (new FileWriter (file+".csv")) );
+            String headers=getColumnNames().toString();
+            print.println(headers.substring(1,headers.length()-1));
+            Enumeration veNums=table_model.getDataVector().elements();
+            while(veNums.hasMoreElements()){
+                String row=veNums.nextElement().toString();
+              print.println(row.substring(1,row.length()-1)); 
+            }
+            System.out.println(table_model.getDataVector().elementAt(0));
+            print.close();          
+         JOptionPane.showMessageDialog(null, "Data Saved Successfully To " +file.getName(), "SAVED", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch (IOException ex) 
+        { 
+            JOptionPane.showMessageDialog(null, "Failed To Save Data", "ERROR "+file.getName(), JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch 
+    }
+
 }

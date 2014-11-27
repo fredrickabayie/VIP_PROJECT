@@ -50,8 +50,6 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
      */
     public ADMIN_INTERFACE() {
         tab = new RouteTable();
-        
-        tab.initialize("bookings", "root", "Ashesi@2016?");
         vector = new Vector ();
         vector.add("TICKET NUMBER");
         vector.add("FIRSTNAME");
@@ -83,23 +81,23 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         admin_table = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        addrow_icon = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        deleterow_icon = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton5 = new javax.swing.JButton();
+        import_icon = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        export_icon = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButton7 = new javax.swing.JButton();
+        connect_icon = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        delete_icon = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
+        display_icon = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         jLabel7 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
@@ -155,32 +153,32 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/Add_Row-26.png"))); // NOI18N
-        jButton1.setToolTipText("Add Row");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addrow_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/Add_Row-26.png"))); // NOI18N
+        addrow_icon.setToolTipText("Add Row");
+        addrow_icon.setFocusable(false);
+        addrow_icon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addrow_icon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        addrow_icon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addrow_iconActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(addrow_icon);
 
         jLabel1.setText("      ");
         jToolBar1.add(jLabel1);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/Delete_Row-26.png"))); // NOI18N
-        jButton2.setToolTipText("Delete Row");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        deleterow_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/Delete_Row-26.png"))); // NOI18N
+        deleterow_icon.setToolTipText("Delete Row");
+        deleterow_icon.setFocusable(false);
+        deleterow_icon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleterow_icon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        deleterow_icon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                deleterow_iconActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(deleterow_icon);
         jToolBar1.add(jSeparator1);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/undo-26.png"))); // NOI18N
@@ -201,75 +199,75 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jToolBar1.add(jButton3);
         jToolBar1.add(jSeparator2);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/import-26.png"))); // NOI18N
-        jButton5.setToolTipText("Import");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        import_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/import-26.png"))); // NOI18N
+        import_icon.setToolTipText("Import");
+        import_icon.setFocusable(false);
+        import_icon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        import_icon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        import_icon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                import_iconActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton5);
+        jToolBar1.add(import_icon);
 
         jLabel3.setText("      ");
         jToolBar1.add(jLabel3);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/export-26.png"))); // NOI18N
-        jButton6.setToolTipText("Export");
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        export_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/export-26.png"))); // NOI18N
+        export_icon.setToolTipText("Export");
+        export_icon.setFocusable(false);
+        export_icon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        export_icon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        export_icon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                export_iconActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton6);
+        jToolBar1.add(export_icon);
         jToolBar1.add(jSeparator3);
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/accept_database-26.png"))); // NOI18N
-        jButton7.setToolTipText("Connect To Database");
-        jButton7.setFocusable(false);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        connect_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/accept_database-26.png"))); // NOI18N
+        connect_icon.setToolTipText("Connect To Database");
+        connect_icon.setFocusable(false);
+        connect_icon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        connect_icon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        connect_icon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                connect_iconActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton7);
+        jToolBar1.add(connect_icon);
 
         jLabel4.setText("   ");
         jToolBar1.add(jLabel4);
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/delete_database-26.png"))); // NOI18N
-        jButton8.setToolTipText("Delete From Database");
-        jButton8.setFocusable(false);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        delete_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/delete_database-26.png"))); // NOI18N
+        delete_icon.setToolTipText("Delete From Database");
+        delete_icon.setFocusable(false);
+        delete_icon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        delete_icon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        delete_icon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                delete_iconActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton8);
+        jToolBar1.add(delete_icon);
 
         jLabel5.setText("   ");
         jToolBar1.add(jLabel5);
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/data_backup-26.png"))); // NOI18N
-        jButton9.setToolTipText("Display Database");
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        display_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/data_backup-26.png"))); // NOI18N
+        display_icon.setToolTipText("Display Database");
+        display_icon.setFocusable(false);
+        display_icon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        display_icon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        display_icon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                display_iconActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton9);
+        jToolBar1.add(display_icon);
         jToolBar1.add(jSeparator5);
 
         jLabel7.setText("                                                                                                                                                                                                    ");
@@ -478,52 +476,46 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     }//GEN-LAST:event_about_menuitemActionPerformed
 
     private void export_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_menuitemActionPerformed
-        // TODO add your handling code here:
         save();
     }//GEN-LAST:event_export_menuitemActionPerformed
 
     private void import_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_import_menuitemActionPerformed
-        // TODO add your handling code here:
-        open();
+       open();
     }//GEN-LAST:event_import_menuitemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if ( admin_table.getSelectedRow ( ) >= 0 )
-        table_model.insertRow ( admin_table.getSelectedRow ( ), new Vector ( ) );
-        else
-        table_model.addRow ( new Vector( ) );
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void addrow_iconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addrow_iconActionPerformed
+        admincontrol.addRow();
+    }//GEN-LAST:event_addrow_iconActionPerformed
 
     private void display_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_display_menuitemActionPerformed
         // TODO add your handling code here:
         admincontrol.display();
     }//GEN-LAST:event_display_menuitemActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void connect_iconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connect_iconActionPerformed
         // TODO add your handling code here:
         admincontrol.initialize();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_connect_iconActionPerformed
 
     private void delete_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_menuitemActionPerformed
         // TODO add your handling code here:
         admincontrol.delete();
     }//GEN-LAST:event_delete_menuitemActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void deleterow_iconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleterow_iconActionPerformed
         // TODO add your handling code here:
         admincontrol.deleteRow();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_deleterow_iconActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void import_iconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_import_iconActionPerformed
         // TODO add your handling code here:
         open();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_import_iconActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void export_iconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_iconActionPerformed
         // TODO add your handling code here:
         save();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_export_iconActionPerformed
 
     private void update_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_menuitemActionPerformed
         // TODO add your handling code here:
@@ -557,78 +549,26 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         admincontrol.insert();
     }//GEN-LAST:event_insert_menuItemActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void delete_iconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_iconActionPerformed
         // TODO add your handling code here:
         admincontrol.delete();
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_delete_iconActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void display_iconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_display_iconActionPerformed
         // TODO add your handling code here:
         admincontrol.display();
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_display_iconActionPerformed
 
-     /**
-     * A method to return the column names in the table
-     * @return 
-     */
-    private Vector getColumnNames ( )
-    {
-        Vector <String> vector = new Vector < > ( );
-        for ( int i=0; i < admin_table.getColumnCount ( ); i++ )
-            vector.add ( admin_table.getColumnName ( i ) );
-        return vector;
-    }//End Of Method
-    
     
     /**
      * A method to display the open filechooser dialog
      */
-    private void open ( )
+    public void open ( )
     {
         if ( filechooser.showOpenDialog ( this ) == JFileChooser.APPROVE_OPTION )
-            open ( filechooser.getSelectedFile ( ) );
+            admincontrol.open ( filechooser.getSelectedFile ( ) );
     }//End Of Method
     
-    
-    /**
-     * A method to get the file chosen and display the data
-     * @param file 
-     */
-    private void open ( File file )
-    {
-        String line;
-        String splitHere=",";
-        //DefaultTableModel model= (DefaultTableModel)admin_table.getModel();
-        try
-        {
-//            input = new BufferedReader ( new InputStreamReader(new FileInputStream(file+".csv")));
-            
-//            input = new ObjectInputStream ( new FileInputStream ( file ) );
-//            Vector rowData = ( Vector )input.readObeject();
-            input = new Scanner ( new BufferedReader ( new FileReader( file )));
-            //input.next();
-            while (input.hasNextLine()){
-             String [] oneTicket=input.nextLine().split(splitHere);
-             
-                Vector row=new Vector();
-                for(int i=0;i<oneTicket.length;i++){
-                    row.add(oneTicket[i]);
-                }
-                
-                table_model.addRow(row);
-            }
-//            Vector rowData = ( Vector )input.readObject( );
-//         Vector columnNames = ( Vector )input.readObject ( );
-//         table_model.setDataVector ( rowData, columnNames );
-         input.close();
-         JOptionPane.showMessageDialog ( null, "Successfully Opened The File " +file.getName(), "OPENED", JOptionPane.INFORMATION_MESSAGE);
-        }//End Of Try
-        catch (IOException ex)
-        { 
-        JOptionPane.showMessageDialog(null, "Failed To Open File " +file.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        }//End Of Catch
-
-    }//End Of Method
     
     /**
      * A method to display the save filechooser dialog
@@ -636,104 +576,32 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     private void save ( )
     {
         if ( filechooser.showSaveDialog ( this ) == JFileChooser.APPROVE_OPTION )
-            save ( filechooser.getSelectedFile ( ) );
+            admincontrol.save ( filechooser.getSelectedFile ( ) );
     }//End Of Method
     
-    /**
-     * A method to get the file name to save the data to a file
-     * @param file 
-     */
-    private void save ( File file )
-    {
-        try
-        {
-            print = new PrintWriter ( new BufferedWriter (new FileWriter (file+".csv")) );
-            String headers=getColumnNames().toString();
-            print.println(headers.substring(1,headers.length()-1));
-            Enumeration veNums=table_model.getDataVector().elements();
-            while(veNums.hasMoreElements()){
-               
-               //for(int i=0;i<11;i++){
-                    
-//                    print.print(();
-                //}
-                String row=veNums.nextElement().toString();
-                
-              print.println(row.substring(1,row.length()-1)); 
-          
-            }
-            //print.print(table_model.getDataVector());
-            System.out.println(table_model.getDataVector().elementAt(0));
-            print.close();          
-//       output.writeObject(table_model.getDataVector());
-//         output.writeObject(getColumnNames());
-//         output.close();
-         JOptionPane.showMessageDialog(null, "Data Saved Successfully To " +file.getName(), "SAVED", JOptionPane.INFORMATION_MESSAGE);
-        }//End Of Try
-        catch (IOException ex) 
-        { 
-            JOptionPane.showMessageDialog(null, "Failed To Save Data", "ERROR "+file.getName(), JOptionPane.ERROR_MESSAGE);
-        }//End Of Catch 
-            
-        
-    }//End Of Method
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ADMIN_INTERFACE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ADMIN_INTERFACE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ADMIN_INTERFACE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ADMIN_INTERFACE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ADMIN_INTERFACE().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_menuitem;
+    private javax.swing.JButton addrow_icon;
     private javax.swing.JMenuItem addrow_menuitem;
     public static javax.swing.JTable admin_table;
     private javax.swing.JMenuItem clear_menuitem;
+    private javax.swing.JButton connect_icon;
     private javax.swing.JMenuItem connectdatabase_menuitem;
+    private javax.swing.JButton delete_icon;
     private javax.swing.JMenuItem delete_menuitem;
+    private javax.swing.JButton deleterow_icon;
     private javax.swing.JMenuItem deleterow_menuitem;
+    private javax.swing.JButton display_icon;
     private javax.swing.JMenuItem display_menuitem;
+    private javax.swing.JButton export_icon;
     private javax.swing.JMenuItem export_menuitem;
+    private javax.swing.JButton import_icon;
     private javax.swing.JMenuItem import_menuitem;
     private javax.swing.JMenuItem insert_menuItem;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
