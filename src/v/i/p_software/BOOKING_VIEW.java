@@ -398,6 +398,7 @@ long ticket_id;
       updateId.println(ticket_id+1);
         updateId.close();
         dispose();
+        new WELCOME_INTERFACE().setVisible(true);
      }
     }                                        
 

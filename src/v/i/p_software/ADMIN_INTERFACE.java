@@ -7,16 +7,27 @@
 package v.i.p_software;
 
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static v.i.p_software.RouteTable.routeTab;
 
 /**
  *
@@ -28,12 +39,17 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
      private ObjectInputStream input;
      private ObjectOutputStream output;
      private final Vector vector;
+     RouteTable tab;
+     PrintWriter print;
+//     BufferedReader input;
+     Connection connection;
 
     /**
      * Creates new form ADMIN_INTERFACE
      */
     public ADMIN_INTERFACE() {
-        
+        tab = new RouteTable();
+        tab.initialize("bookings", "root", "Ashesi@2016?");
         vector = new Vector ();
         vector.add("TICKET NUMBER");
         vector.add("FIRSTNAME");
@@ -41,12 +57,11 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         vector.add("PHONE");
         vector.add("EMAIL");
         vector.add("GENDER");
-        vector.add("JOURNEY");
-        vector.add("TIME");
-        vector.add("TRAVEL DATE");
+        vector.add("TRAVEL");
+        vector.add("Departure");
         vector.add("PRICE");
-//        vector.add("");
-//        vector.add("");
+        vector.add("TRAVEL DATE");
+        vector.add("Age");
         table_model = new DefaultTableModel (new Vector(), vector);
         filechooser = new JFileChooser();
         initComponents();
@@ -63,7 +78,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        admin_table = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -115,8 +130,11 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         setTitle("ADMINISTRATOR");
         setIconImage(Toolkit.getDefaultToolkit ( ).getImage(getClass().getResource("vip-48.png")));
 
-        jTable1.setModel(table_model);
-        jScrollPane1.setViewportView(jTable1);
+        admin_table.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        admin_table.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        admin_table.setModel(table_model);
+        admin_table.setRowHeight(30);
+        jScrollPane1.setViewportView(admin_table);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -155,6 +173,11 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton2);
         jToolBar1.add(jSeparator1);
 
@@ -181,6 +204,11 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton5);
 
         jLabel3.setText("      ");
@@ -191,6 +219,11 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton6);
         jToolBar1.add(jSeparator3);
 
@@ -199,6 +232,11 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jButton7.setFocusable(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton7);
 
         jLabel4.setText("   ");
@@ -314,6 +352,11 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         update_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         update_menuitem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/data_protection-26.png"))); // NOI18N
         update_menuitem.setText("Update");
+        update_menuitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_menuitemActionPerformed(evt);
+            }
+        });
         jMenu5.add(update_menuitem);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
@@ -325,11 +368,21 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         delete_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         delete_menuitem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/delete_database-26.png"))); // NOI18N
         delete_menuitem.setText("Delete");
+        delete_menuitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_menuitemActionPerformed(evt);
+            }
+        });
         jMenu5.add(delete_menuitem);
 
         display_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         display_menuitem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/data_backup-26.png"))); // NOI18N
         display_menuitem.setText("Display");
+        display_menuitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                display_menuitemActionPerformed(evt);
+            }
+        });
         jMenu5.add(display_menuitem);
 
         jMenuBar1.add(jMenu5);
@@ -396,8 +449,116 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        if ( admin_table.getSelectedRow ( ) >= 0 )
+        table_model.insertRow ( admin_table.getSelectedRow ( ), new Vector ( ) );
+        else
+        table_model.addRow ( new Vector( ) );
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void display_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_display_menuitemActionPerformed
+        // TODO add your handling code here:
+        table_model.setRowCount(0);        
+        try 
+        {
+             Statement statement = connection.createStatement ( );
+             ResultSet resultSet = statement.executeQuery ( "SELECT * FROM booking" );
+         while ( resultSet.next ( ) )
+         {
+             Object [] w = {resultSet.getString ( "TicketNo" ),resultSet.getString ( "FirstName" ),resultSet.getString ( "SurName" ),
+             resultSet.getString ( "Phone" ),resultSet.getString ( "Email" ), resultSet.getString ( "Gender" ),resultSet.getString ( "Travel" ),
+             resultSet.getString ( "Departure" ),resultSet.getString ( "Price" ),resultSet.getString ( "Traveldate" ),resultSet.getString ( "Age" )};
+             table_model.addRow(w);
+         }//End Of While
+         JOptionPane.showMessageDialog(null, "Successfully Dispalyed The Data In The DataBase", "Displayed", JOptionPane.INFORMATION_MESSAGE);     
+         
+        }//End Of Try
+        catch ( SQLException e ) 
+        {
+        JOptionPane.showMessageDialog(null, "Failed To Display The Data In The DataBase", "Failed", JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch
+    }//GEN-LAST:event_display_menuitemActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+            Class.forName ( "com.mysql.jdbc.Driver" ).newInstance ( );
+             connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/bookings?user=root&password=Ashesi@2016?");
+             JOptionPane.showMessageDialog(null, "Successfully Connected To The DataBase", "Connected", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch ( ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e )
+        {
+            JOptionPane.showMessageDialog(null, "Failed To Connect To The DataBase", "Not Connected", JOptionPane.ERROR_MESSAGE);
+            System.out.println ( "Not Connected " + e.toString ( ) );
+        }//End Of Catch
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void delete_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_menuitemActionPerformed
+        // TODO add your handling code here:
+         try
+        {
+            PreparedStatement pStatement = connection.prepareStatement ( "Delete From booking Where TicketNo=?" );
+            for (int i = 0; i < table_model.getRowCount(); i++)
+            {
+            pStatement.setString( 1, (String) admin_table.getValueAt(i,0) );
+            pStatement.executeUpdate( );
+            pStatement.execute();
+            }//End Of For
+        JOptionPane.showMessageDialog(null, "Successfully Deleted The Data From The DataBase", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch ( SQLException e )
+        {
+            JOptionPane.showMessageDialog(null, "Failed To Delete The Data From The DataBase", "Not Deleted", JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch
+    }//GEN-LAST:event_delete_menuitemActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if ( admin_table.getSelectedRow ( ) >= 0 )
+            table_model.removeRow ( admin_table.getSelectedRow ( ) );
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        open();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        save();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void update_menuitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_menuitemActionPerformed
+        // TODO add your handling code here:
+         try
+        {
+            PreparedStatement pStatement = connection.prepareStatement("Update Booking set where TicketNo=?, FirstName=? ,SurName =?,Phone=?,"
+                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?, Age=?");
+            
+         for ( int i = 0; i < table_model.getRowCount(); i++ )
+            {
+            pStatement.setString ( 1, (String) admin_table.getValueAt(i,0) );
+            pStatement.setString ( 2, (String) admin_table.getValueAt(i,1) );
+            pStatement.setString ( 3, (String) admin_table.getValueAt(i,2) );
+            pStatement.setString ( 4, (String) admin_table.getValueAt(i,3) );
+            pStatement.setString ( 5, (String) admin_table.getValueAt(i,4) );
+            pStatement.setString ( 6, (String) admin_table.getValueAt(i,5) );
+            pStatement.setString ( 7, (String) admin_table.getValueAt(i,6) );
+            pStatement.setString ( 8, (String) admin_table.getValueAt(i,7) );
+            pStatement.setString ( 9, (String) admin_table.getValueAt(i,8) );
+            pStatement.setString ( 10, (String) admin_table.getValueAt(i,9) );
+            pStatement.setString ( 11, (String) admin_table.getValueAt(i,10) );
+            
+            pStatement.executeUpdate ( );
+            pStatement.execute();
+            }//End Of For
+            JOptionPane.showMessageDialog(null, "Successfully Updated The Data To The DataBase", "Updated", JOptionPane.INFORMATION_MESSAGE);
+        }//End Of Try
+        catch ( SQLException e )
+        {
+            JOptionPane.showMessageDialog(null, "Failed To Update The Data To The DataBase", "Failed", JOptionPane.ERROR_MESSAGE);
+        }//End Of Catch
+    }//GEN-LAST:event_update_menuitemActionPerformed
 
     
     /**
@@ -409,6 +570,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
             open ( filechooser.getSelectedFile ( ) );
     }//End Of Method
     
+    
     /**
      * A method to get the file chosen and display the data
      * @param file 
@@ -417,7 +579,10 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     {
         try
         {
-            input = new ObjectInputStream ( new FileInputStream ( file ) );
+//            input = new BufferedReader ( new InputStreamReader(new FileInputStream(file+".csv")));
+            
+            input = new ObjectInputStream ( new FileInputStream ( file+".csv" ) );
+//            Vector rowData = ( Vector )input.readObeject();
             Vector rowData = ( Vector )input.readObject( );
          Vector columnNames = ( Vector )input.readObject ( );
          table_model.setDataVector ( rowData, columnNames );
@@ -448,10 +613,12 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     {
         try
         {
-       output = new ObjectOutputStream ( new FileOutputStream (file)); 
-       output.writeObject(table_model.getDataVector());
+            print = new PrintWriter ( new BufferedWriter (new FileWriter (file+".csv")) );
+            print.print(table_model.getDataVector());
+            print.close();          
+//       output.writeObject(table_model.getDataVector());
 //         output.writeObject(getColumnNames());
-         output.close();
+//         output.close();
          JOptionPane.showMessageDialog(null, "Data Saved Successfully To " +file.getName(), "SAVED", JOptionPane.INFORMATION_MESSAGE);
         }//End Of Try
         catch (IOException ex) 
@@ -499,6 +666,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_menuitem;
     private javax.swing.JMenuItem addrow_menuitem;
+    private javax.swing.JTable admin_table;
     private javax.swing.JMenuItem clear_menuitem;
     private javax.swing.JMenuItem connectdatabase_menuitem;
     private javax.swing.JMenuItem connecttable_menuitem;
@@ -540,7 +708,6 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem keyboard_menuitem;
