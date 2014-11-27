@@ -7,9 +7,12 @@
 package v.i.p_software;
 
 import java.awt.Component;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,20 +30,30 @@ long ticket_id;
     public BOOKING_VIEW() {
         initComponents();
         bookingControl = new CreateBookingControl ();
-//        generateId();
+        generateId();
         id_fileld.setText(""+ticket_id);
     }
 
     
-//    public void generateId ()
-//    {
-//        Scanner readFromFile=null;
-//        try
-//        {
-//            readFromFile = new Scanner(new File("tid.txt"));
-//        }
-//        catch
-//    }
+    public void generateId ()
+    {
+        Scanner readFromFile=null;
+        try
+        {
+            readFromFile = new Scanner(new File("tid.txt"));
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println (e.toString()+" Please stop f arround");
+        }
+            
+            while(readFromFile.hasNext())
+            {
+                ticket_id=Long.parseLong(readFromFile.next());
+            }
+        
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,7 +88,7 @@ long ticket_id;
         jLabel10 = new javax.swing.JLabel();
         time_field = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        date_field = new com.toedter.calendar.JDateChooser();
         jDesktopPane2 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,7 +105,7 @@ long ticket_id;
 
         jLabel9.setText("Price");
 
-        gender_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "Male", "Female" }));
+        gender_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "M", "F" }));
         gender_combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gender_comboActionPerformed(evt);
@@ -201,7 +214,7 @@ long ticket_id;
                                                 .addComponent(browse_button))
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                 .addGap(9, 9, 9)
-                                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                                .addComponent(date_field, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel10)
@@ -230,44 +243,43 @@ long ticket_id;
                     .addComponent(id_fileld, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(30, 30, 30)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(first_field, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(surname_field, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phone_field, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email_field, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(first_field, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(surname_field, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phone_field, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(email_field, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(age_field, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(gender_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(52, 52, 52)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(time_field, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(price_field, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(journey_field, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(browse_button))
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(age_field, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(gender_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(52, 52, 52)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(time_field, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(price_field, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(journey_field, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browse_button))
+                .addGap(27, 27, 27)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date_field, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submit_button, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
@@ -298,7 +310,7 @@ long ticket_id;
         jDesktopPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(time_field, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jDateChooser1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(date_field, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
         jDesktopPane2.setLayout(jDesktopPane2Layout);
@@ -352,7 +364,7 @@ long ticket_id;
      }
      else  {     
         
-        bookingControl.setValues(0,id_field.getText());//store the ticket Id
+        bookingControl.setValues(0,id_fileld.getText());//store the ticket Id
         bookingControl.setValues(1,first_field.getText());//store the first name
         bookingControl.setValues(2,surname_field.getText() );//store surname    
         bookingControl.setValues(3,phone_field.getText());//stores the phone number     
@@ -360,35 +372,33 @@ long ticket_id;
         bookingControl.setValues(5,gender_combo.getSelectedItem().toString() );//stores the Passanger's Gender           
         bookingControl.setValues(6,journey_field.getText());   //Records the journey    
         bookingControl.setValues(7,time_field.getText());//stores the departure time
-        bookingControl.setValues(8,price_field.getText());//stores the ticket price
+        bookingControl.setValues(8,price_field.getText());//stores the ticket price 
         String strDate = null;
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-        strDate=sdf.format(dateChooserCombo1.getSelectedDate().getTime());
+        strDate=sdf.format(date_field.getDate().getTime());
+       
+        
         bookingControl.setValues(9,strDate); //store the date as string
+        //int age = Integer.parseInt(age_field.getText());
+        bookingControl.setValues(10,age_field.getText());
           try{
         bookingControl.book(); //The method inserts the stored details in the bookings database
         }
         catch (Exception e){
             
         }
-//        PrintWriter updateId=null;
-//      try{
-////     updateId=new PrintWriter("tid.txt");
-//    //output=new PrintWriter(new FileOutputStream("Students.txt",true));
-//     } catch(FileNotFoundException e){
-//     System.out.println("Please load a file!");
-//     }
-////      updateId.println(ticketId+1);  
-//        
-//        updateId.close();
-        
-        
-     
-        
+        PrintWriter updateId=null;
+      try{
+     updateId=new PrintWriter("tid.txt");
+//    output=new PrintWriter(new FileOutputStream("Students.txt",true));
+     } catch(FileNotFoundException e){
+     System.out.println("Please load a file!");
+     }
+      
+      updateId.println(ticket_id+1);
+        updateId.close();
         dispose();
      }
-        
-        
     }                                        
 
     public boolean validateInputs(){
@@ -459,11 +469,11 @@ long ticket_id;
     private javax.swing.JTextField age_field;
     private javax.swing.JButton browse_button;
     private javax.swing.JButton cancel_button;
+    private com.toedter.calendar.JDateChooser date_field;
     private javax.swing.JTextField email_field;
     private javax.swing.JTextField first_field;
     private javax.swing.JComboBox gender_combo;
     private javax.swing.JLabel id_fileld;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;

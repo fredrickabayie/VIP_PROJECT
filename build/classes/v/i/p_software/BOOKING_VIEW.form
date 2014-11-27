@@ -130,7 +130,7 @@
                                               </Group>
                                               <Group type="102" attributes="0">
                                                   <EmptySpace min="9" pref="9" max="-2" attributes="0"/>
-                                                  <Component id="jDateChooser1" min="-2" pref="132" max="-2" attributes="0"/>
+                                                  <Component id="date_field" min="-2" pref="132" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -173,54 +173,52 @@
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="first_field" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="surname_field" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="first_field" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="surname_field" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel4" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="phone_field" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="email_field" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel6" max="32767" attributes="0"/>
+                              <Component id="age_field" pref="42" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel4" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="phone_field" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="email_field" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel6" max="32767" attributes="0"/>
-                                      <Component id="age_field" pref="42" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="gender_combo" min="-2" pref="39" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" min="-2" pref="36" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel10" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="time_field" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="price_field" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel7" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="journey_field" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="browse_button" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jLabel11" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="gender_combo" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="jLabel5" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel10" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="time_field" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="price_field" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel7" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="journey_field" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="browse_button" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel11" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="date_field" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -265,8 +263,8 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
                 <StringItem index="0" value="..."/>
-                <StringItem index="1" value="Male"/>
-                <StringItem index="2" value="Female"/>
+                <StringItem index="1" value="M"/>
+                <StringItem index="2" value="F"/>
               </StringArray>
             </Property>
           </Properties>
@@ -368,7 +366,7 @@
             <Property name="text" type="java.lang.String" value="Date"/>
           </Properties>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+        <Component class="com.toedter.calendar.JDateChooser" name="date_field">
         </Component>
       </SubComponents>
     </Container>

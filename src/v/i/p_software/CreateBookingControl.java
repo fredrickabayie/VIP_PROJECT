@@ -19,7 +19,7 @@ import java.util.Date;
  */
 public class CreateBookingControl {
     java.sql.Connection conn = null;
-    String [] details=new String[10];
+    String [] details=new String[11];
     Date ticketDate=null;
     
     PersonCrud personDB = new PersonCrud();
@@ -34,7 +34,7 @@ public class CreateBookingControl {
         try {
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
 	conn = java.sql.DriverManager.getConnection(
-	"jdbc:mysql://localhost/Bookings?user=root&password=");
+	"jdbc:mysql://localhost/Bookings?user=root&password=Ashesi@2016?");
 	
 	}
 	catch (Exception e) {
@@ -49,27 +49,28 @@ public class CreateBookingControl {
     public void book() throws ParseException{
         try{
         PreparedStatement p=conn.prepareStatement("Insert Into Booking set TicketNo=?, FirstName=? ,SurName =?,Phone=?,"
-                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?");
-    p.setString(1,details[0]);
-    p.setString(2,details[1]);
-    p.setString(3,details[2]);
-    p.setString(4,details[3]);
-    p.setString(5,details[4]);
-    p.setString(6,details[5]);
-    p.setString(7,details[6]);
-    p.setString(8,details[7]);
-    p.setDouble(9,Double.parseDouble(details[8]));
+                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?, Age=?");
+    p.setString(1,details[0]);//tid
+    p.setString(2,details[1]);//fname
+    p.setString(3,details[2]);//sname
+    p.setString(4,details[3]);//phone
+    p.setString(5,details[4]);//email
+    p.setString(6,details[5]); //gender
+    p.setString(7,details[6]);//jourey
+    p.setString(8,details[7]);//time
+    p.setDouble(9,Double.parseDouble(details[8])); //price
     
     //fn, sn, id, pn,g,e,age
 //    Person createdPerson = new Person(details[1], details[2], details[0], details[3], details[5], details[4]);
 //    personDB.addPerson(createdPerson);
     
      SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy");
-        Date parsed = format.parse(details[9]);
+        Date parsed = format.parse(details[9]); 
         java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
     
    
-    p.setDate(10,sqlDate);
+    p.setDate(10,sqlDate); //date
+    p.setInt(11, Integer.parseInt(details[10])); //age
     
  
     
