@@ -7,14 +7,11 @@
 package v.i.p_software;
 
 import java.awt.Toolkit;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
@@ -23,11 +20,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static v.i.p_software.RouteTable.routeTab;
 
 /**
  *
@@ -99,9 +101,9 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         jLabel7 = new javax.swing.JLabel();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
         jButton10 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         new_menuitem = new javax.swing.JMenuItem();
@@ -145,7 +147,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(77, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -263,14 +265,20 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jLabel7.setText("                                                                                                                                                                                                    ");
         jLabel7.setToolTipText("");
         jToolBar1.add(jLabel7);
-        jToolBar1.add(jSeparator4);
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/search-26.png"))); // NOI18N
         jButton10.setFocusable(false);
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton10);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jTextField1);
+        jToolBar1.add(jSeparator4);
 
         jMenu1.setMnemonic('F');
         jMenu1.setText("File");
@@ -532,23 +540,31 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         // TODO add your handling code here:
          try
         {
-            PreparedStatement pStatement = connection.prepareStatement("Update Booking set where TicketNo=?, FirstName=? ,SurName =?,Phone=?,"
-                + " Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?, Age=?");
+            PreparedStatement pStatement = connection.prepareStatement("Update booking set FirstName=? ,SurName=?,Phone=?, "
+                    + "Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?, Age=? where TicketNo=?");
             
          for ( int i = 0; i < table_model.getRowCount(); i++ )
             {
-            pStatement.setString ( 1, (String) admin_table.getValueAt(i,0) );
-            pStatement.setString ( 2, (String) admin_table.getValueAt(i,1) );
-            pStatement.setString ( 3, (String) admin_table.getValueAt(i,2) );
-            pStatement.setString ( 4, (String) admin_table.getValueAt(i,3) );
-            pStatement.setString ( 5, (String) admin_table.getValueAt(i,4) );
-            pStatement.setString ( 6, (String) admin_table.getValueAt(i,5) );
-            pStatement.setString ( 7, (String) admin_table.getValueAt(i,6) );
-            pStatement.setString ( 8, (String) admin_table.getValueAt(i,7) );
-            pStatement.setString ( 9, (String) admin_table.getValueAt(i,8) );
-            pStatement.setString ( 10, (String) admin_table.getValueAt(i,9) );
-            pStatement.setString ( 11, (String) admin_table.getValueAt(i,10) );
             
+            pStatement.setString ( 1, (String) admin_table.getValueAt(i,1) );
+            pStatement.setString ( 2, (String) admin_table.getValueAt(i,2) );
+            pStatement.setString ( 3, (String) admin_table.getValueAt(i,3) );
+            pStatement.setString ( 4, (String) admin_table.getValueAt(i,4) );
+            pStatement.setString ( 5, (String) admin_table.getValueAt(i,5) );
+            pStatement.setString ( 6, (String) admin_table.getValueAt(i,6) );
+            pStatement.setString ( 7, (String) admin_table.getValueAt(i,7) );
+            pStatement.setString ( 8, (String) admin_table.getValueAt(i,8) );
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsed = format.parse( (String) admin_table.getValueAt(i, 9)); 
+        java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
+        System.out.println((String)admin_table.getValueAt(i, 9));
+        
+            pStatement.setDate ( 9, sqlDate );
+            pStatement.setInt ( 10, Integer.parseInt((String)admin_table.getValueAt(i,10)) );
+            pStatement.setString ( 11, (String) admin_table.getValueAt(i,0) );
+            System.out.println((String)admin_table.getValueAt(i, 0));
+            System.out.println((String)admin_table.getValueAt(i, 10));
             pStatement.executeUpdate ( );
             pStatement.execute();
             }//End Of For
@@ -556,9 +572,16 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         }//End Of Try
         catch ( SQLException e )
         {
+            System.out.println("the error"+e.toString());
             JOptionPane.showMessageDialog(null, "Failed To Update The Data To The DataBase", "Failed", JOptionPane.ERROR_MESSAGE);
+        } catch (ParseException ex) {
+            Logger.getLogger(ADMIN_INTERFACE.class.getName()).log(Level.SEVERE, null, ex);
         }//End Of Catch
     }//GEN-LAST:event_update_menuitemActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     
     /**
@@ -614,7 +637,13 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         try
         {
             print = new PrintWriter ( new BufferedWriter (new FileWriter (file+".csv")) );
-            print.print(table_model.getDataVector());
+            Enumeration veNums=table_model.getDataVector().elements();
+            while(veNums.hasMoreElements()){
+              print.println(veNums.nextElement()); 
+            
+            }
+            //print.print(table_model.getDataVector());
+            System.out.println(table_model.getDataVector().elementAt(0));
             print.close();          
 //       output.writeObject(table_model.getDataVector());
 //         output.writeObject(getColumnNames());
