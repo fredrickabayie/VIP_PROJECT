@@ -52,6 +52,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         table_model = new DefaultTableModel (new Vector(), vector);
         filechooser = new JFileChooser();
         initComponents();
+        
         rowSorter = new TableRowSorter<>(admin_table.getModel());
         admin_table.setRowSorter( rowSorter);
     }
@@ -93,7 +94,6 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JToolBar.Separator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        new_menuitem = new javax.swing.JMenuItem();
         export_menuitem = new javax.swing.JMenuItem();
         import_menuitem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -119,7 +119,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit ( ).getImage(getClass().getResource("vip-48.png")));
 
         admin_table.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        admin_table.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        admin_table.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         admin_table.setModel(table_model);
         admin_table.setRowHeight(30);
         jScrollPane1.setViewportView(admin_table);
@@ -128,7 +128,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1234, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +258,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jToolBar1.add(display_icon);
         jToolBar1.add(jSeparator5);
 
-        jLabel7.setText("                                                                                                                                                                                                                                       ");
+        jLabel7.setText("                                                                                                                                                                                                                                   ");
         jLabel7.setToolTipText("");
         jToolBar1.add(jLabel7);
 
@@ -268,6 +268,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton10);
 
+        search_field.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         search_field.setText("search");
         search_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,10 +280,6 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
 
         jMenu1.setMnemonic('F');
         jMenu1.setText("File");
-
-        new_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        new_menuitem.setText("New");
-        jMenu1.add(new_menuitem);
 
         export_menuitem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         export_menuitem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/v/i/p_software/export-26.png"))); // NOI18N
@@ -443,7 +440,9 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPane1)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1234, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,7 +617,6 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem keyboard_menuitem;
-    private javax.swing.JMenuItem new_menuitem;
     public static javax.swing.JTextField search_field;
     private javax.swing.JMenuItem update_menuitem;
     // End of variables declaration//GEN-END:variables

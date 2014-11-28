@@ -48,6 +48,7 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(-10, 0, 700, 380);
 
+        newbooking_button.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         newbooking_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\fred\\Pictures\\add_user-48.png")); // NOI18N
         newbooking_button.setMnemonic('N');
         newbooking_button.setText("New Booking");
@@ -63,6 +64,7 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
         jPanel1.add(newbooking_button);
         newbooking_button.setBounds(70, 150, 110, 80);
 
+        admin_button.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         admin_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\fred\\Pictures\\administrator2-48.png")); // NOI18N
         admin_button.setMnemonic('A');
         admin_button.setText("Administrator");
@@ -75,7 +77,7 @@ public class WELCOME_INTERFACE extends javax.swing.JFrame {
             }
         });
         jPanel1.add(admin_button);
-        admin_button.setBounds(500, 150, 110, 80);
+        admin_button.setBounds(500, 150, 118, 80);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
