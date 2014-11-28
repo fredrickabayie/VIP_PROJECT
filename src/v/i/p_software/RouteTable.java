@@ -34,7 +34,7 @@ public class RouteTable {
                   System.out.println(e);
                   System.exit(0);
             } 
-            System.out.println("Connection established");
+            //System.out.println("Connection established");
       }
     
     //display routes in database

@@ -2,7 +2,7 @@ package v.i.p_software;
 
 //import static v.i.p_software.BOOKING_VIEW.price_field;
 //import static v.i.p_software.BOOKING_VIEW.time_field;
-
+//import static v.i.p_software.BOOKING_VIEW.journey_field;
 
 
 
@@ -23,8 +23,8 @@ RouteTable tab;
      */
     public Table() {        
         tab = new RouteTable();  
-//        tab.initialize("bookings", "root", "");
-//        tab.retrieveRoute();
+        tab.initialize("bookings", "root", "Ashesi@2016?");
+        tab.retrieveRoute();
         initComponents();
     }
 
@@ -44,7 +44,11 @@ RouteTable tab;
         save_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ROUTE");
+        setUndecorated(true);
+        setType(java.awt.Window.Type.UTILITY);
 
+        table.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         table.setModel(RouteTable.routeTab);
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -53,6 +57,7 @@ RouteTable tab;
         });
         jScrollPane1.setViewportView(table);
 
+        save_button.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         save_button.setText("Save");
         save_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,46 +69,46 @@ RouteTable tab;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(save_button)
-                .addGap(56, 56, 56))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(save_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(save_button)
-                .addGap(21, 21, 21))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(save_button))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         // TODO add your handling code here:
         
     }//GEN-LAST:event_tableMouseClicked
-//    static Object fromValue;
-//    static Object toValue;
-//    static Object timeValue;
-//    static Object priceValue;
+    
+    static Object fromValue;
+    static Object toValue;
+    static Object timeValue;
+    static Object priceValue;
+    
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         // TODO add your handling code here:
-//        int row = table.getSelectedRow();
-//        fromValue = tab.getValueFromSelection(row, 0);
-//        toValue = tab.getValueFromSelection(row, 1);        
-//        timeValue = tab.getValueFromSelection(row, 2);
-//        priceValue = tab.getValueFromSelection(row, 3);
-//        BOOKING_VIEW.journey_field.setText((String)Table.fromValue + " - "+ (String)Table.toValue);
-//        BOOKING_VIEW.time.setText((String)Table.timeValue);
-//        BOOKING_VIEW.price.setText(""+Table.priceValue);
+        int row = table.getSelectedRow();
+        fromValue = tab.getValueFromSelection(row, 0);
+        toValue = tab.getValueFromSelection(row, 1);        
+        timeValue = tab.getValueFromSelection(row, 2);
+        priceValue = tab.getValueFromSelection(row, 3);
+        BOOKING_VIEW.journey_field.setText((String)Table.fromValue + " - "+ (String)Table.toValue);
+        BOOKING_VIEW.time_field.setText((String)Table.timeValue);
+        BOOKING_VIEW.price_field.setText(""+Table.priceValue);
         dispose();
     }//GEN-LAST:event_save_buttonActionPerformed
 
