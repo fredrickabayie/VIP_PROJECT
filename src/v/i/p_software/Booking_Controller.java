@@ -17,14 +17,14 @@ import java.util.Date;
  *
  * @author David Wainaina
  */
-public class CreateBookingControl {
+public class Booking_Controller {
     java.sql.Connection conn = null;
     String [] details=new String[11];
     Date ticketDate=null;
     
     PersonCrud personDB = new PersonCrud();
     
-    public CreateBookingControl(){
+    public Booking_Controller(){
         connect();
         
         
@@ -42,7 +42,7 @@ public class CreateBookingControl {
                 System.out.println("Could not connect");
 		System.exit(0);
 	}	
-	System.out.println("Connection established");
+	//System.out.println("Connection established");
         
     }
     //This method will add booking details into the database
@@ -75,7 +75,7 @@ public class CreateBookingControl {
  
     
    
-    System.out.println("I tried to insert into db");
+   // System.out.println("I tried to insert into db");
     p.execute();  //use execute if no results expected back
     }catch(Exception e){
         System.out.println("Error"+e.toString());

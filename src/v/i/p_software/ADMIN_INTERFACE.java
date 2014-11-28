@@ -7,29 +7,15 @@
 package v.i.p_software;
 
 import java.awt.Toolkit;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -44,6 +30,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
      Scanner input;
      Connection connection;
      Admin_Controller admincontrol = new Admin_Controller();
+     TableRowSorter <TableModel> rowSorter;
 
     /**
      * Creates new form ADMIN_INTERFACE
@@ -61,11 +48,12 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         vector.add("Departure");
         vector.add("PRICE");
         vector.add("TRAVEL DATE");
-        vector.add("Age");
+        vector.add("AGE");
         table_model = new DefaultTableModel (new Vector(), vector);
         filechooser = new JFileChooser();
         initComponents();
-        
+        rowSorter = new TableRowSorter<>(admin_table.getModel());
+        admin_table.setRowSorter( rowSorter);
     }
 
     /**
@@ -101,7 +89,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JToolBar.Separator();
         jLabel7 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        search_field = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -145,8 +133,8 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -270,7 +258,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jToolBar1.add(display_icon);
         jToolBar1.add(jSeparator5);
 
-        jLabel7.setText("                                                                                                                                                                                                    ");
+        jLabel7.setText("                                                                                                                                                                                                                                       ");
         jLabel7.setToolTipText("");
         jToolBar1.add(jLabel7);
 
@@ -280,13 +268,13 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton10);
 
-        jTextField1.setText("search");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search_field.setText("search");
+        search_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                search_fieldActionPerformed(evt);
             }
         });
-        jToolBar1.add(jTextField1);
+        jToolBar1.add(search_field);
         jToolBar1.add(jSeparator4);
 
         jMenu1.setMnemonic('F');
@@ -462,8 +450,7 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jDesktopPane1))
         );
 
         pack();
@@ -540,9 +527,14 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
         admincontrol.initialize();
     }//GEN-LAST:event_connectdatabase_menuitemActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void search_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+//        admincontrol.search();
+        if ( search_field.getText().trim().length() == 0 )
+           rowSorter.setRowFilter( null );
+        else
+         rowSorter.setRowFilter ( RowFilter.regexFilter ( search_field.getText( ) ) );
+    }//GEN-LAST:event_search_fieldActionPerformed
 
     private void insert_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_menuItemActionPerformed
         // TODO add your handling code here:
@@ -624,10 +616,10 @@ public class ADMIN_INTERFACE extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem keyboard_menuitem;
     private javax.swing.JMenuItem new_menuitem;
+    public static javax.swing.JTextField search_field;
     private javax.swing.JMenuItem update_menuitem;
     // End of variables declaration//GEN-END:variables
 }

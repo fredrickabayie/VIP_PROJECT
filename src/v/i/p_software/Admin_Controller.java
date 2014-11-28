@@ -27,8 +27,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import static v.i.p_software.ADMIN_INTERFACE.admin_table;
 import static v.i.p_software.ADMIN_INTERFACE.table_model;
+import static v.i.p_software.ADMIN_INTERFACE.search_field;
 
 /**
  *
@@ -39,8 +43,7 @@ public class Admin_Controller {
     Scanner input;
     JFileChooser filechooser;
     PrintWriter print;
- 
-    
+      
     public void initialize()
     {
          try
@@ -87,6 +90,9 @@ public class Admin_Controller {
             PreparedStatement pStatement = connection.prepareStatement ( "Delete From booking Where TicketNo="+deleteThis+";" );
             pStatement.execute();
         JOptionPane.showMessageDialog(null, "Successfully Deleted The Data From The DataBase", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+        
+            if ( admin_table.getSelectedRow ( ) >= 0 )
+            ADMIN_INTERFACE.table_model.removeRow ( admin_table.getSelectedRow ( ) );
         }//End Of Try
         catch ( SQLException e )
         {
@@ -105,8 +111,8 @@ public class Admin_Controller {
     {
          try
         {
-            PreparedStatement pStatement = connection.prepareStatement("Update booking set FirstName=? ,SurName=?,Phone=?, "
-                    + "Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?, Age=? where TicketNo=?");
+            PreparedStatement pStatement = connection.prepareStatement("Update booking set FirstName=? ,SurName=?,Phone=?,"
+                    + "Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?,Age=? where TicketNo=?");
             
          for ( int i = 0; i < table_model.getRowCount(); i++ )
             {
@@ -116,51 +122,55 @@ public class Admin_Controller {
             pStatement.setString ( 3, (String) admin_table.getValueAt(i,3) );
             pStatement.setString ( 4, (String) admin_table.getValueAt(i,4) );
             pStatement.setString ( 5, (String) admin_table.getValueAt(i,5) );
-            pStatement.setString ( 6, (String) admin_table.getValueAt(i,6) );
+            pStatement.setString ( 6,  admin_table.getValueAt(i,6).toString().trim() );
             pStatement.setString ( 7, (String) admin_table.getValueAt(i,7) );
             pStatement.setString ( 8, (String) admin_table.getValueAt(i,8) );
             
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             Date parsed = format.parse( (String) admin_table.getValueAt(i, 9)); 
             java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
-            System.out.println((String)admin_table.getValueAt(i, 9));
+            //System.out.println((String)admin_table.getValueAt(i, 9));
         
             pStatement.setDate ( 9, sqlDate );
-            pStatement.setInt ( 10, Integer.parseInt((String)admin_table.getValueAt(i,10)) );
+            pStatement.setInt ( 10, Integer.parseInt(admin_table.getValueAt(i,10).toString().trim() ));
             pStatement.setString ( 11, (String) admin_table.getValueAt(i,0) );
-            System.out.println((String)admin_table.getValueAt(i, 0));
-            System.out.println((String)admin_table.getValueAt(i, 10));
-            pStatement.executeUpdate ( );
+           // System.out.println((String)admin_table.getValueAt(i, 0));
+           // System.out.println((String)admin_table.getValueAt(i, 10));
+           // pStatement.executeUpdate ( );
             pStatement.execute();
             }//End Of For
             JOptionPane.showMessageDialog(null, "Successfully Updated The Data To The DataBase", "Updated", JOptionPane.INFORMATION_MESSAGE);
         }//End Of Try
         catch ( SQLException e )
         {
-            System.out.println("the error"+e.toString());
+            //System.out.println("the error"+e.toString());
             JOptionPane.showMessageDialog(null, "Failed To Update The Data To The DataBase", "Failed", JOptionPane.ERROR_MESSAGE);
         } catch (ParseException ex) {
             Logger.getLogger(ADMIN_INTERFACE.class.getName()).log(Level.SEVERE, null, ex);
-        }//End Of Catch
+        }catch(NullPointerException e){
+            System.out.println(e.toString());
+        }
+//End Of Catch
     }
     
     public void insert()
     {
          try
         {
-            PreparedStatement pStatement = connection.prepareStatement("Insert into booking set TicketNo=?, FirstName=? ,SurName=?,Phone=?,"
+            PreparedStatement pStatement = connection.prepareStatement("Insert into booking set TicketNo=?, FirstName=?,SurName=?,Phone=?,"
                     + "Email=?,Gender=?,Travel=?,Departure=?,Price=?,Traveldate=?, Age=?");
             
          for ( int i = 0; i < table_model.getRowCount();i++)
             {
                 System.out.println(table_model.getRowCount() + "doing this row ");
             pStatement.setString ( 1, (String) admin_table.getValueAt(i,0) );
-            System.out.println("this is ha!! "+i);
+           // System.out.println("this is ha!! "+i);
             pStatement.setString ( 2, (String) admin_table.getValueAt(i,1) );
             pStatement.setString ( 3, (String) admin_table.getValueAt(i,2) );
             pStatement.setString ( 4, (String) admin_table.getValueAt(i,3) );
             pStatement.setString ( 5, (String) admin_table.getValueAt(i,4) );
-            pStatement.setString ( 6, (String) admin_table.getValueAt(i,5) );
+            
+            pStatement.setString ( 6, admin_table.getValueAt(i,5).toString().trim() );
             pStatement.setString ( 7, (String) admin_table.getValueAt(i,6) );
             pStatement.setString ( 8, (String) admin_table.getValueAt(i,7) );
             pStatement.setString ( 9, (String) admin_table.getValueAt(i,8) );
@@ -169,12 +179,12 @@ public class Admin_Controller {
             Date parsed = format.parse( (String) admin_table.getValueAt(i, 9)); 
             java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
             pStatement.setDate ( 10, sqlDate );
-            pStatement.setInt ( 11, Integer.parseInt((String)admin_table.getValueAt(i,10)) );
+            pStatement.setInt ( 11, Integer.parseInt(admin_table.getValueAt(i,10).toString().trim()) );
             try{
             pStatement.execute();
-            System.out.println("Inserted this " + i );
+            //System.out.println("Inserted this " + i );
             } catch(Exception e){
-                
+               // System.out.println("Error " + e.toString());
             }
             }//End Of For
             JOptionPane.showMessageDialog(null, "Successfully Updated The Data To The DataBase", "Updated", JOptionPane.INFORMATION_MESSAGE);
@@ -255,4 +265,11 @@ public class Admin_Controller {
         }//End Of Catch 
     }
 
+//    public void search ( )
+//    {
+//        if ( search_field.getText().trim().length() == 0 )
+//           rowSorter.setRowFilter( null );
+//        else
+//         rowSorter.setRowFilter ( RowFilter.regexFilter ( search_field.getText( ) ) );
+//    }
 }
