@@ -56,7 +56,7 @@ public class Booking_Controller {
     p.setString(4,details[3]);//phone
     p.setString(5,details[4]);//email
     p.setString(6,details[5]); //gender
-    p.setString(7,details[6]);//jourey
+    p.setString(7,details[6]);//journey
     p.setString(8,details[7]);//time
     p.setDouble(9,Double.parseDouble(details[8])); //price
     
@@ -79,8 +79,24 @@ public class Booking_Controller {
     p.execute();  //use execute if no results expected back
     }catch(Exception e){
         System.out.println("Error"+e.toString());
-        return;        
+        //return;        
     }
+        TicketView list=new TicketView();
+        list.setVisible(true);
+        
+        list.list_model.addElement("Ticket Number:  " +  details[0]);
+        list.list_model.addElement("First Name:  " +  details[1]);
+        list.list_model.addElement("SurName: " +  details[2]);
+        list.list_model.addElement("Phone: " +  details[3]);
+        list.list_model.addElement("Email:  " +  details[4]);
+        list.list_model.addElement("Gender:  " +  details[5]);
+        list.list_model.addElement("Journey:  " +  details[6]);
+        list.list_model.addElement("Time: " +  details[7]);
+        list.list_model.addElement("Price:  " + details[8]);
+        list.list_model.addElement("Date of Travel: " + details[9]);
+        list.list_model.addElement("Age:  " + details[10]);
+        
+        
         
     }
     
